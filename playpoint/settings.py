@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-yazhmd-playpointdjangob-ezcvkls547o.ws.codeinstitute-ide.net', "playpoint-blog-app-e1f6b1f1bdf7.herokuapp.com"]
+    '8000-yazhmd-playpointdjangob-ezcvkls547o.ws.codeinstitute-ide.net', "playpoint-blog-app-v2-e446459e072b.herokuapp.com"]
 
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net',
                         'https://*.herokuapp.com']
