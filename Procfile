@@ -1,1 +1,1 @@
-web: gunicorn playpoint.wsgi
+gunicorn playpoint.wsgi
