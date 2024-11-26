@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-yazhmd-playpointdjangob-ezcvkls547o.ws.codeinstitute-ide.net', "playpoint-blog-app-e1f6b1f1bdf7.herokuapp.com"]
