@@ -1,3 +1,90 @@
-h1 {
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
 }
+
+
+/* General styles */
+
+:root {
+
+    /* fonts */
+    --main-font: 'Roboto', serif;
+
+    /* colours */
+
+    /* Utils */
+
+    --small-box-shadow: 1 -1px 7px 0 rgba(0, 0, 0, 0.967);
+    border: 1px solid black;
+}
+
+
+
+
+/* Header */
+.navbar {
+
+    background-color: white;
+     
+
+}
+
+a.nav-link {
+
+    color: black;
+    box-shadow: var(--small-box-shadow);
+
+}
+
+
+
+/* Main */
+
+
+html,
+body {
+
+    height: 100%;
+
+}
+
+body {
+
+    display: flex;
+    flex-direction: column;
+    font-family: var(--main-font);
+
+}
+
+main {
+
+    flex: 1 0 auto;
+    background-color: white;
+
+
+}
+
+
+
+
+/* Footer */
+
+footer {
+
+flex-shrink: 0;
+
+
+}
+
+
+
+
