@@ -2,13 +2,16 @@
 
 <header>
 
+  {% with request.resolver_match.url_name as url_name %}
+
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
 
       <!-- Logo -->
-
-      <a class="navbar-brand" href="#"> <img src="(% static 'images/logo.webp' %)" alt="Playpoint website logo"
-          class="main-logo"> </a>
+      <a class="navbar-brand" href="{% url 'home' %}"><img
+          src="{% static 'images/Playpoint_logo_icon-removebg-preview.png' %}" alt=" Playpoint joystick Logo"
+          class="logo"></a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,27 +22,42 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link  {% if url_name == 'home' %}active{% endif %}" aria-current="page"
+              href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Reviews</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
+
+
+
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}  "
+              href="/account/logout">Logout</a>
           </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/account/login">Create New Review</a>
+          </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link  {% if url_name == 'accounts_signup' %}active{% endif %}  "
+              href="/account/signup">Register</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %} " href="/account/login">Login</a>
+          </li>
+
+
+
+          {% endif %}
+
+
         </ul>
 
         <!-- Search Bar -->
@@ -58,6 +76,6 @@
 
 
 
-
+  {% endwith %}
 
 </header>
