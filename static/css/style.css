@@ -4,7 +4,7 @@
 
 
 * {
-    outline: 1px solid rgba(0, 0, 255, 0.5);
+    /* outline: 1px solid rgba(0, 0, 255, 0.5); */
 }
 
 
@@ -30,7 +30,7 @@
 .navbar {
 
     background-color: white;
-
+    box-shadow: 0 8px 6px -6px #999;
 
 }
 
@@ -103,13 +103,15 @@ main {
 footer {
 
     flex-shrink: 0;
-    background-color: rgb(248 249 250);
+
+    background-color: rgba(248, 249, 250, 0.136);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-top: var(--border);
-
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0px -4px 6px rgba(0, 0, 0, 0.1);
 
 }
 

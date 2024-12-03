@@ -6,7 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django-Setup {% block title %} {% endblock %} </title>
+    <title>PlayPoint {% block title %} {% endblock %} </title>
+
+    <!-- Link to Favicon -->
+    <link rel="icon" href="{% static 'icons/favicon/favicon-96x96.webp'%}">
 
 
 
@@ -30,7 +33,7 @@
 <body>
     {% include 'includes/header.html' %}
 
-    <h1>Hello Django From Heroku</h1>
+
 
     <main>
         {% block content %}

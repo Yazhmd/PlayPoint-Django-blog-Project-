@@ -73,8 +73,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 DJRICHTEXTFIELD_CONFIG = {
+    
     'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
     'init_template': 'djrichtextfield/init/ckeditor.js',
+   
     'settings': {
         'toolbar': [
             ['Format', 'Bold', 'Italic', 'Underline'],
