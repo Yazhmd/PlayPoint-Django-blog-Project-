@@ -1,93 +1,78 @@
-{% load static %}
+ {% load static %}
 
-<header>
+ <header>
 
-  {% with request.resolver_match.url_name as url_name %}
+   {% with request.resolver_match.url_name as url_name %}
 
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+     <div class="container-fluid">
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+       <a class="navbar-brand" href="{% url 'home' %}">
+         <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
+           class="logo">
+       </a>
 
-      <!-- Logo -->
+       <a class="navbar-brand" href="{% url 'home' %}">
+         <img src="{% static 'images/Playpoint_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
+           class="logo-title">
+       </a>
 
-      <!-- <a class="navbar-brand" href="{% url 'home' %}"><img
-          src="{% static 'images/Playpoint_logo-removebg-preview.png' %}" alt=" Playpoint joystick Logo"
-          class="logo"></a> -->
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
 
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item">
+             <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
+               href="{% url 'home' %}">Home</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="#">Reviews</a>
+           </li>
 
-      <a class="navbar-brand" href="{% url 'home' %}"><img
-          src="{% static 'images/Playpoint_logo_icon-removebg-preview.png' %}" alt=" Playpoint joystick Logo"
-          class="logo"></a>
-
-
-      <a class="navbar-brand" href="{% url 'home' %}"><img
-          src="{% static 'images/Playpoint_logo_title-removebg-preview.png' %}" alt=" Playpoint Title"
-          class="logo-title"></a>
-
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Navigation items/links  -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link  {% if url_name == 'home' %}active{% endif %}" aria-current="page"
-              href="{% url 'home' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Reviews</a>
-          </li>
+           {% if request.user.is_authenticated %}
+           <li class="nav-item">
+             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}"
+               href="/account/logout">Logout</a>
+           </li>
 
 
 
-          {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}  "
-              href="/account/logout">Logout</a>
-          </li>
+           {% else %}
+           <li class="nav-item">
+             <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}"
+               href="/account/signup">Register</a>
+           </li>
 
+           <li class="nav-item">
+             <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/account/login">Login</a>
+           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/account/login">+ Create New Review</a>
-          </li>
+           {% endif %}
 
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link  {% if url_name == 'accounts_signup' %}active{% endif %}  "
-              href="/account/signup">Register</a>
-          </li>
+         </ul>
 
+         {% if request.user.is_authenticated %}
+         <div class="search-and-button">
+           <a href="{% url 'add_review' %}">
+             <button class="btn btn-success add-review-button">
+               + Create New Review
+             </button>
+           </a>
+           {% endif %}
 
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %} " href="/account/login">Login</a>
-          </li>
+           <form class="d-flex search-form" role="search">
+             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-outline-primary" type="submit">Search</button>
+           </form>
+         </div>
 
+       </div>
+     </div>
+   </nav>
 
+   {% endwith %}
 
-          {% endif %}
-
-
-        </ul>
-
-        <!-- Search Bar -->
-
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
-
-      </div>
-    </div>
-  </nav>
-
-
-
-
-
-
-  {% endwith %}
-
-</header>
+ </header>

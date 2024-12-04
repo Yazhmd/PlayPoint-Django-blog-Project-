@@ -4,7 +4,7 @@
 
 
 * {
-    /* outline: 1px solid rgba(0, 0, 255, 0.5); */
+    outline: 1px solid rgba(0, 0, 255, 0.5);
 }
 
 
@@ -39,6 +39,22 @@ a.nav-link {
     color: black;
     box-shadow: var(--small-box-shadow);
 
+}
+
+
+
+.search-and-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.add-review-button {
+    margin-right: 10px;
+}
+
+.search-form {
+    margin-left: 10px;
 }
 
 
@@ -102,22 +118,16 @@ main {
 
 footer {
 
-    flex-shrink: 0;
-
     background-color: rgba(248, 249, 250, 0.136);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-top: var(--border);
+
     box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1),
         inset 0px -4px 6px rgba(0, 0, 0, 0.1);
 
 }
 
-img.social-icons {
+.social-icons {
 
-    width: 3rem;
+    width: 2rem;
 
     height: auto;
 

@@ -1,25 +1,48 @@
 {% load static %}
 
-<footer>
+<footer class="d-flex justify-content-between align-items-center py-3 my-4 border-top">
 
-    <!-- Social media icons -->
+    <!--Logo and Copyright -->
+    <div class="col-md-4 d-flex align-items-center">
+        <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="playpoint logo"
+            class="logo me-2">
+        <span class="text-body-secondary">© 2024 PlayPoint, Yazdan Ahmed</span>
+    </div>
 
-<div  class="social-icons">
-    
-    <a href="" target="_blank" rel="noopener" aria-label="Github - Opens in new tab">
-        <img src="{% static 'icons/github-icon.webp' %}" alt="Github Icon" class="social-icons" />
-    </a>
+    <!-- Social Icons -->
+    <div class="d-flex justify-content-center align-items-center">
+        <ul class="nav list-unstyled d-flex">
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://github.com/Yazhmd" target="_blank">
+                    <img src="{% static '/icons/github-icon.webp' %}" alt="Github icon" class="social-icons">
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://www.linkedin.com/in/yazdan-ahmed-60b606279/"
+                    target="_blank">
+                    <img src="{% static 'icons/linkedin-app-icon.webp' %}" alt="Linkedin icon" class="social-icons">
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-body-secondary" href="https://www.youtube.com/@yazhmd8671" target="_blank">
+                    <img src="{% static '/icons/youtube-color-icon.webp' %}" alt="Youtube icon" class="social-icons">
+                </a>
+            </li>
+        </ul>
+    </div>
 
 
-    <a href="" target="_blank" rel="noopener" aria-label="LinkedIn - Opens in new tab">
-        <img src="{% static 'icons/linkedin-app-icon.webp' %}" alt="LinkedIn Icon" class="social-icons" />
-    </a>
+    <div>
 
+        <ul class="nav row-md-4 justify-content-end">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        </ul>
 
-    <a href="" target="_blank" rel="noopener" aria-label="YouTube - Opens in new tab">
-        <img src="{% static 'icons/youtube-color-icon.webp' %}" alt="YouTube Icon" class="social-icons" />
-    </a>
+    </div>
 
-</div>
 
 </footer>

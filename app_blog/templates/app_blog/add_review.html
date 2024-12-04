@@ -1,0 +1,29 @@
+{% extends "base.html"   %}
+
+{% block title %} Write A Review {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data" class="p-2 form">
+
+        <h1 class="review-text-center">Create Review </h1>
+        {% csrf_token %}
+        {{form.media}}
+        {{form|crispy}}
+
+        <div class="form-text-center">
+            <button type="submit" class="btn btn-success mt-2">
+                Submit Review
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+</div>
+{% endblock %}
