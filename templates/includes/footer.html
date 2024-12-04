@@ -1,16 +1,19 @@
 {% load static %}
 
-<footer class="d-flex justify-content-between align-items-center py-3 my-4 border-top">
+ 
+
+<footer class="d-flex justify-content-between align-items-center py-3 ">
 
     <!--Logo and Copyright -->
-    <div class="col-md-4 d-flex align-items-center">
+    <div class=" d-flex align-items-center logo-copyright-container">
         <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="playpoint logo"
-            class="logo me-2">
-        <span class="text-body-secondary">© 2024 PlayPoint, Yazdan Ahmed</span>
+            class="footer-logo me-2">
+        <span class="text-body-secondary">© 2024 PlayPoint<br>
+            Yazdan Ahmed</span>
     </div>
 
     <!-- Social Icons -->
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center social-icons-container">
         <ul class="nav list-unstyled d-flex">
             <li class="ms-3">
                 <a class="text-body-secondary" href="https://github.com/Yazhmd" target="_blank">
@@ -31,18 +34,16 @@
         </ul>
     </div>
 
+    <div class=" d-flex align-items-center  footer-nav  links-container">
+        <ul class="nav row-md-4 justify-content-center">
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
 
-    <div>
-
-        <ul class="nav row-md-4 justify-content-end">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+
             <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
         </ul>
-
     </div>
 
-
 </footer>
+
+ 

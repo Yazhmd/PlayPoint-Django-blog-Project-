@@ -4,7 +4,7 @@
 
 
 * {
-    outline: 1px solid rgba(0, 0, 255, 0.5);
+    /* outline: 1px solid rgba(0, 0, 255, 0.5); */
 }
 
 
@@ -26,7 +26,7 @@
 
 
 
-/* Header */
+/* Header-----------------------------------------------------------------------------------> */
 .navbar {
 
     background-color: white;
@@ -58,21 +58,24 @@ a.nav-link {
 }
 
 
-/* Playpoint Icon */
-img.logo {
+/* Playpoint Icon ----------------------------------------------------------------------------------->*/
+a.navbar-brand img.logo {
 
-    width: 6rem;
+    width: 7rem;
 
 
 }
 
-img.logo-title {
+.logo-alt-icon {
 
-    width: 11rem;
-
+    display: none;
 }
 
+.logo-title {
 
+    display: none;
+
+}
 
 .active {
 
@@ -85,7 +88,7 @@ img.logo-title {
 
 
 
-/* Main */
+/* Main ----------------------------------------------------------------------------------->*/
 
 
 html,
@@ -100,7 +103,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: var(--main-font);
-
+    padding-top: 135px;
 }
 
 main {
@@ -114,14 +117,20 @@ main {
 
 
 
-/* Footer */
+/* Footer ----------------------------------------------------------------------------------->*/
 
 footer {
 
     background-color: rgba(248, 249, 250, 0.136);
 
-    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1),
-        inset 0px -4px 6px rgba(0, 0, 0, 0.1);
+    
+
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo {
+
+    width: 3rem;
 
 }
 
@@ -146,4 +155,107 @@ footer {
     box-shadow: var(--small-box-shadow);
     border-radius: 5px;
 
+}
+
+
+/* Media Queries ----------------------------------------------------------------------------------->*/
+
+@media (min-width: 650px) and (max-width: 991px) {
+
+    /* Alternative logo and title between 650px and 991px */
+    a.navbar-brand img.logo {
+        display: none;
+    }
+
+    .logo-alt-icon {
+        display: block;
+        width: 10rem;
+    }
+
+    .logo-title {
+        display: block;
+        width: 20rem;
+    }
+}
+
+@media (max-width: 649px) {
+
+    /* Navbar */
+    /* Reverts back to initial logo for widths below 650px */
+    a.navbar-brand img.logo {
+        display: block;
+
+        width: 7rem;
+
+        margin-left: 50px;
+    }
+
+    .logo-alt-icon,
+    .logo-title {
+        display: none;
+
+    }
+
+
+    /* Footer */
+    footer {
+        display: flex;
+        flex-direction: column;
+        /* Stacks items vertically */
+
+        align-items: center;
+
+        text-align: center;
+
+    }
+
+    footer .social-icons-container {
+        order: 1;
+        /* Move social icons to the top */
+        margin-bottom: 1rem;
+    }
+
+    footer .links-container {
+        order: 2;
+        /* Place links in the middle */
+        margin-bottom: 1rem;
+
+        flex-direction: column;
+
+        gap: 0.5rem;
+
+    }
+
+    footer .logo-copyright-container {
+
+        order: 3;
+        /* Place logo and copyright at the bottom in flexbox */
+        margin-top: auto;
+
+        text-align: center;
+
+        padding-top: 1rem;
+    }
+
+
+    footer img {
+        margin: 0 auto;
+
+    }
+
+
+}
+
+@media (min-width: 992px) {
+
+    .logo-alt-icon,
+    .logo-title {
+
+        display: none;
+    }
+
+    a.navbar-brand img.logo {
+
+        display: block;
+    }
 }
