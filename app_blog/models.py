@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
+from django.core.exceptions import ValidationError
+
 
 # Options for game platforms and consoles
 
@@ -13,6 +15,7 @@ GAME_PLATFORM = [
     ('PlayStation', 'PlayStation'),
     ('XBOX', 'XBOX'),
     ('Nintendo', 'Nintendo'),
+    ('Other', 'Other'),
 ]
 
 GAME_CONSOLE = [
@@ -33,12 +36,12 @@ class Review(models.Model):
     )
 
     title = models.CharField(max_length=200, null=False,
-                             blank=False, default="Untitled")
-    description = models.CharField(
-        max_length=500, null=False, blank=False, default="No description provided"
+                             blank=False, default="")
+    genre = models.CharField(
+        max_length=500, null=False, blank=False, default=""
     )
     review = RichTextField(max_length=10000, null=False,
-                           blank=False, default="No review content provided.")
+                           blank=False, default="")
     images = ResizedImageField(
         size=[400, None],
         quality=75,
@@ -49,15 +52,22 @@ class Review(models.Model):
         default=''
     )
     image_alt = models.CharField(
-        max_length=100, null=False, blank=False, default="No image description available"
+        max_length=100, null=False, blank=False, default=""
     )
     game_platform = models.CharField(
         max_length=50, choices=GAME_PLATFORM, default='PC'
     )
     game_console = models.CharField(
-        max_length=50, choices=GAME_CONSOLE, default=''
+        max_length=100, null=False, blank=False, default=""
     )
-    game_score = models.IntegerField(default=0)
+
+    game_score = models.IntegerField(
+
+
+        choices=[(i, str(i)) for i in range(11)],
+        default=0  # Default value
+    )
+
     posted_date = models.DateTimeField(auto_now=True)
 
     class Meta:
