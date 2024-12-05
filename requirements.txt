@@ -8,6 +8,7 @@ django-allauth==65.3.0
 django-crispy-forms==2.3
 django-resized==1.0.3
 django-richtextfield==1.6.2
+django-summernote==0.8.20.0
 gunicorn==20.1.0
 pillow==11.0.0
 psycopg==3.2.3

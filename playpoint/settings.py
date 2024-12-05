@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 
     'djrichtextfield',
+    'django_summernote',
 
 ]
 
@@ -72,11 +73,15 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+SUMMERNOTE_CONFIG = {
+    'attachment_model': 'django_summernote.Attachment',
+}
+
 DJRICHTEXTFIELD_CONFIG = {
-    
+
     'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
     'init_template': 'djrichtextfield/init/ckeditor.js',
-   
+
     'settings': {
         'toolbar': [
             ['Format', 'Bold', 'Italic', 'Underline'],

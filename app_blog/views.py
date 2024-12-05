@@ -6,7 +6,7 @@ from django.views.generic import CreateView
 
 from .models import Review
 
-from .forms import Reviewform
+from .forms import ReviewForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -21,7 +21,7 @@ class AddReview(LoginRequiredMixin, CreateView):
     """   Add review view     """
     template_name = 'app_blog/add_review.html'
     model = Review
-    form_class = Reviewform
+    form_class = ReviewForm
     # success_url = '/review/'
     success_url = reverse_lazy('add_review')
 
