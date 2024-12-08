@@ -29,7 +29,7 @@
             {% if request.user == review.user %}
             <div class="text-center mt-3">
                 <a href="{% url 'edit_review' review.slug %}" class="btn btn-primary w-25">Edit</a>
-                <a href="{% url 'delete_review' review.slug %}" class="btn btn-danger w-25">Delete</a>
+                <a href="{% url 'delete_review' review.id %}" class="btn btn-danger w-25">Delete</a>
             </div>
             {% endif %}
         </div>

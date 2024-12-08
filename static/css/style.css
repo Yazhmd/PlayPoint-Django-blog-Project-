@@ -126,7 +126,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: var(--main-font);
-    padding-top: 120px;
+    padding-top: 126px;
 }
 
 main {

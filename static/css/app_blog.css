@@ -31,19 +31,48 @@ body {
 
 .card {
     border: none;
-    background-color: transparent;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .image-container {
     position: relative;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+    transform: scale(1.05);
 }
 
 .image-flash {
     position: absolute;
     bottom: 5%;
-    min-width: 30%;
-    left: -2px;
-    background-color: #188181;
+    left: 10%;
+
+    background-color: rgba(24, 129, 129, 0.8);
+    color: #fff;
+    
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .scale {
@@ -52,9 +81,11 @@ body {
 }
 
 .author {
-    color: white;
-    margin: 4px;
+    color: #4A4A4F;
+    font-size: 0.85rem;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 10px;
 }
 
 .masthead {
