@@ -34,7 +34,7 @@
                href="{% url 'home' %}">Home</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link" href="#">Reviews</a>
+             <a class="nav-link" href=" {% url 'index' %}">Reviews</a>
            </li>
 
            {% if request.user.is_authenticated %}

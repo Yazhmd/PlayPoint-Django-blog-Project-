@@ -1,6 +1,6 @@
 {% load static %}
 
- 
+
 
 <footer class="d-flex justify-content-between align-items-center py-3 ">
 
@@ -16,24 +16,25 @@
     <div class="d-flex justify-content-center align-items-center social-icons-container">
         <ul class="nav list-unstyled d-flex">
             <li class="ms-3">
-                <a class="text-body-secondary" href="https://github.com/Yazhmd" target="_blank">
-                    <img src="{% static '/icons/github-icon.webp' %}" alt="Github icon" class="social-icons">
+                <a class="social-icons" href="https://github.com/Yazhmd" target="_blank">
+                    <i class="fa-brands fa-github"></i>
                 </a>
             </li>
             <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.linkedin.com/in/yazdan-ahmed-60b606279/"
-                    target="_blank">
-                    <img src="{% static 'icons/linkedin-app-icon.webp' %}" alt="Linkedin icon" class="social-icons">
+                <a class="social-icons" href="https://www.linkedin.com/in/yazdan-ahmed-60b606279/" target="_blank">
+                    <i class="fa-brands fa-linkedin-in"></i>
                 </a>
             </li>
             <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.youtube.com/@yazhmd8671" target="_blank">
-                    <img src="{% static '/icons/youtube-color-icon.webp' %}" alt="Youtube icon" class="social-icons">
+                <a class="social-icons" href="https://www.youtube.com/@yazhmd8671" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
                 </a>
             </li>
         </ul>
     </div>
 
+
+    <!-- Nav links -->
     <div class=" d-flex align-items-center  footer-nav  links-container">
         <ul class="nav row-md-4 justify-content-center">
             <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
@@ -45,5 +46,3 @@
     </div>
 
 </footer>
-
- 

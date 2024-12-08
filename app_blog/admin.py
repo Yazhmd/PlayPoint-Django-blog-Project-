@@ -9,14 +9,10 @@ from .models import Review
 
 @admin.register(Review)
 class ReviewAdmin(SummernoteModelAdmin):
-    list_display = (
+    list_display = ('title', 'slug', 'status', 'posted_date',
+                    'game_platform', 'game_console', 'review', 'images',)
 
-        'title',
-        'game_platform',
-        'game_console',
-        'review',
-        'images',
-
-    )
-
-    list_filter = ('game_platform',)
+    search_fields = ['title', 'review', 'game_platform',]
+    list_filter = ('status', 'posted_date',)
+    prepopulated_fields = {'slug': ('title',)}
+    summernote_fields = ('review',)

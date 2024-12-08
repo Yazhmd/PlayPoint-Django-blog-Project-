@@ -28,8 +28,8 @@
 
 /* Header-----------------------------------------------------------------------------------> */
 .navbar {
-
-    background-color: white;
+    background-color: rgb(90 97 102);
+    /* background-color: rgb(54, 69, 79); */
     box-shadow: 0 8px 6px -6px #999;
 
 }
@@ -121,11 +121,21 @@ main {
 
 footer {
 
-    background-color: rgba(248, 249, 250, 0.136);
+    border-image: linear-gradient(90deg,
+            #3B82F6 20%,
+            #3B82F6 20%,
+            #EF4444 40%,
+            #EF4444 40%,
+            #FACC15 60%,
+            #FACC15 60%,
+            #10B981 80%,
+            #10B981 80%,
+            #EC4899 100%) 1;
+    border-image-slice: 1;
+    border-style: ridge;
+    border-width: 8px 0 0;
 
 
-
-    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .footer-logo {
@@ -134,14 +144,34 @@ footer {
 
 }
 
-.social-icons {
+.social-icons-container a {
+    color: #343a40;
 
-    width: 2rem;
-
-    height: auto;
+    font-size: 2rem;
+    padding: 10px;
 
 }
 
+.fa-youtube:hover {
+    color: #cc1313;
+    transform: scale(1.2);
+
+
+}
+
+.fa-linkedin-in:hover {
+    color: #0077b5;
+    transform: scale(1.2);
+
+
+
+}
+
+.fa-github:hover {
+
+    color: #181717;
+    transform: scale(1.2);
+}
 
 
 /* Sign in/up Form */

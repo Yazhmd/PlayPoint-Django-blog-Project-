@@ -11,14 +11,13 @@
     <!-- Link to Favicon -->
     <link rel="icon" href="{% static 'icons/favicon/favicon-96x96.webp'%}">
 
+    <!-- Google Fonts CSS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
 
-
-    <!-- Bootstrap JavaScript -->
-    {% block onload_js %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
-        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {% endblock %}
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Bootstrap CSS -->
     {% block extra_css %}
@@ -27,30 +26,38 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/app_blog.css'%}">
 
 </head>
 
-<body>
+<body class="d-flex flex-column h-100 main-bg">
+
+    <!-- Header/Navbar -->
     {% include 'includes/header.html' %}
 
 
-
-    <main>
+    <main class="flex-shrink-0 main-bg">
         {% block content %}
-        {% endblock %}
-
-
-
+        <!-- Content Goes here -->
+        {% endblock content %}
     </main>
 
 
+    <!-- Footer -->
+    {% include 'includes/footer.html' %}
 
 
-    <footer>
-        {% include 'includes/footer.html' %}
 
-    </footer>
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/b29eabad9a.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JavaScript -->
+    {% block onload_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% endblock %}
 
 </body>
 

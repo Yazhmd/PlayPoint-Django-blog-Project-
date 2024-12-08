@@ -4,6 +4,10 @@ from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
 
 # Options for game platforms and consoles
+
+
+STATUS = ((0, "Draft"), (1, "Published"))
+
 GAME_PLATFORM = [
     ('PC', 'PC'),
     ('PlayStation', 'PlayStation'),
@@ -33,6 +37,7 @@ class Review(models.Model):
     )
     title = models.CharField(
         max_length=200, null=False, blank=False, default="")
+    slug = models.SlugField(max_length=200, unique=False )
     genre = models.CharField(
         max_length=500, null=False, blank=False, default="")
     review = models.TextField(
@@ -56,10 +61,35 @@ class Review(models.Model):
         choices=[(i, str(i)) for i in range(11)],
         default=0  # Default value
     )
-    posted_date = models.DateTimeField(auto_now=True)
+    posted_date = models.DateTimeField(auto_now_add=True)
+
+    updated_on = models.DateTimeField(auto_now=True)
+    status = models.IntegerField(choices=STATUS, default=0)
+    featured = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-posted_date',)
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    """
+    A model to create and manage comments on game reviews
+    """
+    review = models.ForeignKey(
+        Review, on_delete=models.CASCADE, related_name="comments"
+    )
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="commenter"
+    )
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"
