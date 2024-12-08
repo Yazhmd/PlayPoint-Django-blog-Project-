@@ -4,11 +4,11 @@
 
    {% with request.resolver_match.url_name as url_name %}
 
-   <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+   <nav class="navbar navbar-expand-lg fixed-top">
      <div class="container-fluid">
 
        <a class="navbar-brand" href="{% url 'home' %}">
-         <img src="{% static 'images/Playpoint_logo-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
+         <img src="{% static 'images/logo_white_full_playpoint-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
            class="logo">
        </a>
 
@@ -18,10 +18,12 @@
        </a>
 
        <a href="{% url 'home' %}">
-         <img src="{% static 'images/Playpoint_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
+         <img src="{% static 'images/White_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
            class="logo-title">
        </a>
 
+
+       <!-- Navigation Links -->
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
@@ -30,11 +32,10 @@
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
            <li class="nav-item">
-             <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page"
-               href="{% url 'home' %}">Home</a>
+             <a class="nav-link  " href="{% url 'home' %}">Home</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link" href=" {% url 'index' %}">Reviews</a>
+             <a class="nav-link {% if url_name == 'review' %}active{% endif %}" href=" {% url 'index' %}">Reviews</a>
            </li>
 
            {% if request.user.is_authenticated %}

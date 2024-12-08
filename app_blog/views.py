@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView , DetailView
 from .models import Review
 from .forms import ReviewForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -14,7 +14,7 @@ class HomePage(TemplateView):
 
 
 # Reviews List view (ListView)
-class Reviews(ListView):
+class Reviews(ListView): 
     """ View all reviews """
     model = Review
     template_name = "app_blog/index.html"

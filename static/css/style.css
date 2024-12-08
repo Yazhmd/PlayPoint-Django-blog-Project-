@@ -4,7 +4,7 @@
 
 
 * {
-    outline: 1px solid rgba(0, 0, 255, 0.5);
+    /* outline: 1px solid rgba(0, 0, 255, 0.5); */
 }
 
 
@@ -28,16 +28,26 @@
 
 /* Header-----------------------------------------------------------------------------------> */
 .navbar {
-    background-color: rgb(90 97 102);
-    /* background-color: rgb(54, 69, 79); */
+
+    background-color: #2c2c2c;
     box-shadow: 0 8px 6px -6px #999;
 
 }
 
+/* Nav Links */
+
 a.nav-link {
 
-    color: black;
+    color: white;
     box-shadow: var(--small-box-shadow);
+
+}
+
+a.nav-link:hover {
+
+    text-decoration: underline;
+    color: #10B981;
+    font-weight: 500;
 
 }
 
@@ -55,6 +65,17 @@ a.nav-link {
 
 .search-form {
     margin-left: 10px;
+}
+
+
+/* Checkbox */
+
+.navbar-toggler {
+
+    background-color: white;
+
+    
+
 }
 
 
@@ -76,15 +97,6 @@ a.navbar-brand img.logo {
     display: none;
 
 }
-
-.active {
-
-    border-bottom: 2px solid var(--blue);
-
-    font-weight: 500;
-
-}
-
 
 
 
@@ -134,6 +146,12 @@ footer {
     border-image-slice: 1;
     border-style: ridge;
     border-width: 8px 0 0;
+
+
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0px -4px 6px rgba(0, 0, 0, 0.1);
+
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.2);
 
 
 }

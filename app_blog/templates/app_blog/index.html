@@ -14,7 +14,7 @@
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
         <div class="card m-3" style="width: 18rem;">
-            <img src="{{ review.image.url }}" class="card-img-top" alt="{{ review.image_alt }}">
+            <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
             <div class="card-body">
                 <h2 class="card-title">{{ review.title }}</h2>
                 <p class="card-text">{{ review.description|truncatechars:100 }}</p>
@@ -43,40 +43,7 @@
     {% endif %}
 </div>
 
-<!-- Blog Entries Section -->
-<h2 class="text-center mt-5">Latest Blog Entries</h2>
-<div class="container-fluid mt-3">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-12 mt-3 left">
-            <div class="row">
-                {% for post in post_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                <div class="image-flash">
-                                    <p class="author">Author: {{ post.author }}</p>
-                                </div>
-                            </div>
-                            <a href="#" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                            </a>
 
-                            <hr />
-                            <p class="card-text text-muted h6">{{ post.created_on }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Pagination Links for Blog Posts -->
 {% if is_paginated %}

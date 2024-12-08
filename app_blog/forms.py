@@ -30,6 +30,6 @@ class ReviewForm(forms.ModelForm):
             'images': 'Game Image',
             'image_alt': 'Describe Game Image',
             'game_platform': 'Pick Game Platform',
-            'game_console': 'Pick Game Console',
+            'game_console': 'Game Console Name',
             'game_score': 'Final Game Review Score',
         }
