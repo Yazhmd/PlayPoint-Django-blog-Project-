@@ -29,8 +29,9 @@
 /* Header-----------------------------------------------------------------------------------> */
 .navbar {
 
-    background-color: #2c2c2c;
+    background-color: rgba(22, 21, 21, 0.8);
     box-shadow: 0 8px 6px -6px #999;
+
 
 }
 
@@ -74,7 +75,7 @@ a.nav-link:hover {
 
     background-color: white;
 
-    
+
 
 }
 
@@ -87,9 +88,19 @@ a.navbar-brand img.logo {
 
 }
 
-.logo-alt-icon {
+
+a.navbar-brand img.logo:hover {
+
+    transform: scale(1.2);
+
+
+}
+
+
+.logo-alt-icon:hover {
 
     display: none;
+    transform: scale(1.2);
 }
 
 .logo-title {
@@ -115,7 +126,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: var(--main-font);
-    padding-top: 135px;
+    padding-top: 120px;
 }
 
 main {
