@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
     # Allauth
     'allauth',
     'allauth.account',
@@ -76,8 +77,18 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+
 SUMMERNOTE_CONFIG = {
     'attachment_model': 'django_summernote.Attachment',
+
+
+    # Change editor size
+    'width': '100%',
+    'height': '480',
+
+    'font_sizes': ['10', '12', '14', '16', '18', '20', '24', '28', '36'],
+    'default_fontsize': '16px',  # Default font size
+
 }
 
 DJRICHTEXTFIELD_CONFIG = {

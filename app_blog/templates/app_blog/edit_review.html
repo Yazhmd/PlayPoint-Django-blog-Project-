@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Edit Review{% endblock %}
 
 {% block content %}
@@ -10,9 +10,15 @@
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center mt-3">
-            <button type="submit" class="btn btn-success">
-                Submit Changes
-            </button>
+
+            <a href="{% url 'review_detail' id=object.id %}">
+                <button type="submit" class="btn btn-success">
+                    Submit Changes
+                </button>
+            </a>
+
+            <a href="{% url 'review_detail' id=object.id %}" class="btn btn-secondary w-45">Cancel</a>
+
         </div>
     </form>
 </div>

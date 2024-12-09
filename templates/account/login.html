@@ -8,6 +8,11 @@
 <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100">
     <div class="card p-4 shadow" style="max-width: 400px; width: 100%;">
         <h1 class="h4 mb-3 text-center">{% trans "Sign In" %}</h1>
+
+        <p class="text-center text-muted mb-4">
+            {% blocktrans %} You are currently not signed in, please sign in.{% endblocktrans %}
+        </p>
+
         <p class="text-center text-muted mb-4">
             {% blocktrans %}If you have not created an account yet, then please
             <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}

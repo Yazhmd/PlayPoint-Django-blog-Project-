@@ -15,7 +15,9 @@
         <!-- Review Details on the Right -->
         <div class="review-details">
             <h1>{{ review.title }}</h1>
-            <p class="text-muted">Posted by {{ review.user }} on {{ review.posted_date|date:"F j, Y" }}</p>
+            <p class="text-muted">
+                <strong>Posted by {{ review.user }} on {{ review.posted_date|date:"F j, Y" }} </strong>
+            </p>
 
             <hr>
 
@@ -26,7 +28,8 @@
             <p><strong>Console: </strong>{{ review.game_console }}</p>
 
             <p><strong>Score: </strong>{{ review.game_score }}/10</p>
-            <p>{{ review.review | safe }}</p>
+
+            <p> <strong> Review: </strong> {{ review.review | safe }}</p>
 
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}

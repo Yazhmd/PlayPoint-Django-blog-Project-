@@ -46,6 +46,8 @@ class Review(models.Model):
         default='app_blog/default_image.webp'
     )
     image_alt = models.CharField(max_length=100)
+    
+    
     game_platform = models.CharField(
         max_length=50, choices=GAME_PLATFORM, default='PC')
     game_console = models.CharField(

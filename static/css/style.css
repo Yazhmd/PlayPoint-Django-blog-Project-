@@ -4,9 +4,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
+/* Main website font */
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
 * {
     /* outline: 1px solid rgba(0, 0, 255, 0.5); */
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+
 }
 
 
@@ -15,7 +23,7 @@
 :root {
 
     /* fonts */
-    --main-font: 'Source Sans 3', sans-serif;
+    --main-font: 'Exo', sans-serif;
 
     /* colours */
 
@@ -25,6 +33,21 @@
     border: 1px solid black;
 }
 
+
+html,
+body {
+
+    height: 100%;
+
+}
+
+body {
+
+    display: flex;
+    flex-direction: column;
+    font-family: var(--main-font);
+    padding-top: 126px;
+}
 
 
 
@@ -115,21 +138,6 @@ a.navbar-brand img.logo:hover {
 /* Main ----------------------------------------------------------------------------------->*/
 
 
-html,
-body {
-
-    height: 100%;
-
-}
-
-body {
-
-    display: flex;
-    flex-direction: column;
-    font-family: var(--main-font);
-    padding-top: 126px;
-}
-
 main {
 
     flex: 1 0 auto;
@@ -137,7 +145,6 @@ main {
 
 
 }
-
 
 
 
@@ -150,6 +157,7 @@ footer {
     background: #fff;
 
     padding: 20px;
+    margin-top: 30px;
 }
 
 footer::before {

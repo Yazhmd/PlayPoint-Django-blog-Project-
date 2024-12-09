@@ -1,0 +1,48 @@
+.jumbotron {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../images/Game_covers_background_hero.webp');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* Dark overlay for the background */
+.jumbotron .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    z-index: 1;
+
+}
+
+/*   above the overlay */
+.jumbotron .content {
+    position: relative;
+    z-index: 2;
+    color: white;
+
+
+}
+
+.jumbotron .content h1,
+.jumbotron .content p {
+    color: white;
+    
+}
+
+.jumbotron img {
+    z-index: 3;
+
+}
