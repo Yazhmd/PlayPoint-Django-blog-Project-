@@ -117,6 +117,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [TEMPLATES_DIR,
 
+                 # Updated template directory
                  os.path.join(BASE_DIR, 'templates', 'account')
 
 

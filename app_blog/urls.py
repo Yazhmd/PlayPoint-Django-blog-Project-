@@ -1,5 +1,7 @@
 from . import views
 from django.urls import path
+from django.contrib.auth.views import LoginView
+
 from .views import (
     TemplateView,
     AddReview, Reviews,
@@ -23,4 +25,7 @@ urlpatterns = [
 
     path('edit/<int:pk>/', views.EditReview.as_view(),
          name='edit_review'),  # Edit review
+
+
+    
 ]

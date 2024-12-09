@@ -22,12 +22,14 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('allauth.urls')),
+    path('account/', include('django.contrib.auth.urls')),
+
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('summernote/', include('django_summernote.urls')),
- 
+
     path('app_blog/', include('app_blog.urls')),
 
-  
-   
+
+
     path('', include('app_blog.urls')),
 ]

@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 from django.views.generic import (
     TemplateView, CreateView, ListView,
@@ -8,8 +9,8 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Review
-from .forms import ReviewForm
+from .models import Review, Comment
+from .forms import ReviewForm, CommentForm
 
 
 # HomePage view
@@ -24,7 +25,7 @@ class AddReview(LoginRequiredMixin, CreateView):
     template_name = 'app_blog/add_review.html'
     model = Review
     form_class = ReviewForm
-    success_url = reverse_lazy('reviews')   
+    success_url = reverse_lazy('reviews')
 
     def form_valid(self, form):
         """Automatically assign the logged-in user to the review."""
@@ -45,11 +46,29 @@ class Reviews(ListView):
         return Review.objects.filter(status=1)
 
 
-# Review Detail view 
+# Review Detail view
 def review_detail(request, id):
     """Display details of a single review."""
     review = get_object_or_404(Review, id=id)
-    return render(request, 'app_blog/review_detail.html', {'review': review})
+
+    #  comment submission
+    if request.method == "POST" and request.user.is_authenticated:
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            
+            # Assign the logged-in user to the comment
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.review = review
+            comment.save()
+            return redirect('review_detail', id=review.id)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'app_blog/review_detail.html', {
+        'review': review,
+        'comment_form': comment_form,
+    })
 
 
 # DeleteReview view (DeleteView)
@@ -57,7 +76,7 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """View to delete a review."""
     model = Review
     template_name = 'app_blog/review_confirm_delete.html'
-    success_url = reverse_lazy('reviews')   
+    success_url = reverse_lazy('reviews')
 
     def test_func(self):
         """Ensure only the owner can delete their review."""
@@ -70,7 +89,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     template_name = 'app_blog/edit_review.html'
     form_class = ReviewForm
-    success_url = reverse_lazy('reviews')   
+    success_url = reverse_lazy('reviews')
 
     def test_func(self):
         """Ensure only the owner can edit their review."""

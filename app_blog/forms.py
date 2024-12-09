@@ -1,6 +1,6 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
-from .models import Review
+from .models import Review, Comment
 
 
 class ReviewForm(forms.ModelForm):
@@ -32,4 +32,16 @@ class ReviewForm(forms.ModelForm):
             'game_platform': 'Pick Game Platform',
             'game_console': 'Game Console Name',
             'game_score': 'Final Game Review Score',
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+
+        model = Comment
+        fields = ['body']
+
+        widgets = {
+            'review': SummernoteWidget(),
+
         }

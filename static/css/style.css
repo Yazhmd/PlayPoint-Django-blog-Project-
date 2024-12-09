@@ -29,7 +29,7 @@
 /* Header-----------------------------------------------------------------------------------> */
 .navbar {
 
-    background-color: rgba(22, 21, 21, 0.8);
+    background-color: #000000cf;
     box-shadow: 0 8px 6px -6px #999;
 
 
@@ -92,8 +92,7 @@ a.navbar-brand img.logo {
 a.navbar-brand img.logo:hover {
 
     transform: scale(1.2);
-    transition: transform 0.3s ease 
-
+    transition: transform 0.3s ease
 }
 
 
