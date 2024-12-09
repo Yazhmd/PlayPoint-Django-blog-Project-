@@ -35,11 +35,11 @@
              <a class="nav-link  " href="{% url 'home' %}">Home</a>
            </li>
            <li class="nav-item">
-             <a class="nav-link {% if url_name == 'review' %}active{% endif %}" href=" {% url 'index' %}">Reviews</a>
+             <a class="nav-link {% if url_name == 'review' %}active{% endif %}" href=" {% url 'reviews' %}">Reviews</a>
            </li>
 
            <li class="nav-item">
-             <a class="nav-link {% if url_name == '' %}active{% endif %}" href=" {% url 'index' %}">About Us</a>
+             <a class="nav-link {% if url_name == '' %}active{% endif %}" href=" {% url 'reviews' %}">About Us</a>
            </li>
 
            {% if request.user.is_authenticated %}

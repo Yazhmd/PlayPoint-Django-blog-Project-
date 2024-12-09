@@ -92,7 +92,7 @@ a.navbar-brand img.logo {
 a.navbar-brand img.logo:hover {
 
     transform: scale(1.2);
-
+    transition: transform 0.3s ease 
 
 }
 
@@ -184,14 +184,14 @@ footer {
 .fa-youtube:hover {
     color: #cc1313;
     transform: scale(1.2);
-
+    transition: transform 0.3s ease, color 0.3s ease;
 
 }
 
 .fa-linkedin-in:hover {
     color: #0077b5;
     transform: scale(1.2);
-
+    transition: transform 0.3s ease, color 0.3s ease;
 
 
 }
@@ -200,6 +200,7 @@ footer {
 
     color: #181717;
     transform: scale(1.2);
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 

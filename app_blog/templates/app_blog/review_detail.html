@@ -28,7 +28,7 @@
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
             <div class="text-center mt-3">
-                <a href="{% url 'edit_review' review.slug %}" class="btn btn-primary w-25">Edit</a>
+                <a href="{% url 'edit_review' review.id %}" class="btn btn-primary w-25">Edit</a>
                 <a href="{% url 'delete_review' review.id %}" class="btn btn-danger w-25">Delete</a>
             </div>
             {% endif %}
@@ -53,7 +53,7 @@
 
         <!-- Add Comment Form -->
         {% if user.is_authenticated %}
-        <form action="{% url 'add_comment' review.slug %}" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <textarea name="body" rows="4" class="form-control" placeholder="Add a comment..." required></textarea>
