@@ -42,6 +42,13 @@ class CommentForm(forms.ModelForm):
         fields = ['body']
 
         widgets = {
-            'review': SummernoteWidget(),
+            'body': SummernoteWidget(),
+
+
+        }
+
+        labels = {
+
+            'body': 'Write a Comment',
 
         }

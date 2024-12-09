@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
+
+from cloudinary.models import CloudinaryField
+
+
 from django_resized import ResizedImageField
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
@@ -24,6 +28,8 @@ def get_default_user():
     # Return None when no user is authenticated
     return None
 
+# Review Model---------------------------------------------------------------->
+
 
 class Review(models.Model):
     user = models.ForeignKey(
@@ -44,11 +50,10 @@ class Review(models.Model):
         max_length=50, choices=GAME_PLATFORM, default='PC')
     game_console = models.CharField(
         max_length=100, null=False, blank=False, default="")
-    
+
     game_score = models.IntegerField(
         choices=[(i, str(i)) for i in range(11)], default=0)
-    
-    
+
     posted_date = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -75,15 +80,18 @@ class Review(models.Model):
         return self.title
 
 
+# Comment Model---------------------------------------------------------------->
 class Comment(models.Model):
+
     review = models.ForeignKey(
         Review, on_delete=models.CASCADE, related_name="comments"
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="review_comments"
     )
-    body = models.TextField()
+    body = models.TextField(max_length=10000)
     created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
 
     class Meta:

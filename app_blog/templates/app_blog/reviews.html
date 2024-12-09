@@ -4,19 +4,21 @@
 {% block title %}Reviews{% endblock %}
 
 {% block content %}
-<!-- index.html content starts here -->
+
 
 <h1 class="text-center p-2 d-block">
     Review Library
 </h1>
 
+
+<!-- Review Cards List -->
 <div class="container d-flex flex-row flex-wrap justify-content-center">
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
-        <div class="card m-3" style="width: 18rem;">
+        <div class="card  m-3 game-card-body">
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
             <div class="card-body">
-                <h2 class="card-title">{{ review.title }}</h2>
+                <p class="card-title game-title">{{ review.title }} </p>
                 <p class="card-text">{{ review.description|truncatechars:100 }}</p>
             </div>
         </div>

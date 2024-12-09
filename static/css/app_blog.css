@@ -44,6 +44,36 @@ body {
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Game Card */
+
+.game-card-body {
+
+
+    width: 16rem;
+
+}
+
+.game-card-body:hover {
+
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* Glossy effect on hover */
+    filter: brightness(1.4);
+
+    /* Smooth transition */
+
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, filter 0.3s ease-in-out;
+
+}
+
+.game-title {
+    font-size: 1.5rem;
+    width: 15rem;
+    text-decoration: none;
+
+}
+
 .image-container {
     position: relative;
     overflow: hidden;
@@ -68,7 +98,7 @@ body {
 
     background-color: rgba(24, 129, 129, 0.8);
     color: #fff;
-    
+
     padding: 5px 10px;
     border-radius: 8px;
     font-size: 0.9rem;
