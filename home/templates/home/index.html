@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+
+<div class="container flex-column pt-3">
+    <section class="text-center">
+        <h1 class="main-title mx-auto">Explore the Latest Game Reviews</h1>
+
+        <p class="pt-4">
+            Dive into our curated collection of reviews for the latest and greatest games. Whether you're looking for
+            insights, ratings, or just inspiration for your next gaming adventure, we've got you covered.
+        </p>
+    </section>
+    <section>
+        <div class="review-cont">
+            {% for review in reviews %}
+            <a href="{% url 'review_detail' review.id %}" class="card">
+                <div class="image-container">
+                    <img src="{{ review.game_image.url }}" alt="{{ review.game_title }}" style="width: 100%">
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">{{ review.game_title }}</h2>
+                    <p class="card-text">{{ review.snippet|truncatechars:100 }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+{% endblock %}

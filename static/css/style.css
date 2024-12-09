@@ -48,7 +48,7 @@ a.nav-link {
 
 a.nav-link:hover {
 
-    text-decoration: underline;
+
     color: #10B981;
     font-weight: 500;
 
@@ -143,30 +143,41 @@ main {
 
 /* Footer ----------------------------------------------------------------------------------->*/
 
+
 footer {
+    position: relative;
+    z-index: 1;
+    background: #fff;
 
-    border-image: linear-gradient(90deg,
-            #3B82F6 20%,
-            #3B82F6 20%,
-            #EF4444 40%,
-            #EF4444 40%,
-            #FACC15 60%,
-            #FACC15 60%,
-            #10B981 80%,
-            #10B981 80%,
-            #EC4899 100%) 1;
-    border-image-slice: 1;
-    border-style: ridge;
-    border-width: 8px 0 0;
-
-
-    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1),
-        inset 0px -4px 6px rgba(0, 0, 0, 0.1);
-
-    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.2);
-
-
+    padding: 20px;
 }
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+
+    /* Border thickness */
+    width: 100%;
+    background: linear-gradient(90deg,
+            red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    animation: rainbow-flow 6s linear infinite;
+}
+
+/* Keyframes for animation */
+@keyframes rainbow-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
 
 .footer-logo {
 

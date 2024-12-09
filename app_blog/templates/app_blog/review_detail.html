@@ -26,7 +26,7 @@
             <p><strong>Console: </strong>{{ review.game_console }}</p>
 
             <p><strong>Score: </strong>{{ review.game_score }}/10</p>
-            <p>{{ review.review }}</p>
+            <p>{{ review.review | safe }}</p>
 
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
@@ -56,11 +56,12 @@
 
         <!-- Add Comment Form -->
         {% if user.is_authenticated %}
-        <form action="" method="post">
+        <form method="post">
             {% csrf_token %}
 
             <div class="form-group">
-                <textarea name="body" rows="4" class="form-control" placeholder="Add a comment..." required></textarea>
+                <textarea name="body" rows="4" class="form-control"
+                    placeholder="Add a comment or even your own game score..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
         </form>

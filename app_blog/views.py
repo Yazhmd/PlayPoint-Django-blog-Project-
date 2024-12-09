@@ -9,6 +9,8 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+from django.db.models import Q
+
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
@@ -45,6 +47,21 @@ class Reviews(ListView):
         """Fetch only reviews with status approved."""
         return Review.objects.filter(status=1)
 
+    def get_queryset(self, **kwargs):
+        query = self.request.GET.get('q')
+        if query:
+            review = self.model.objects.filter(
+                Q(title__icontains=query) |
+                Q(review__icontains=query) |
+                Q(genre__icontains=query) |
+                Q(game_platform__icontains=query) |
+                Q(game_console__icontains=query)
+            )
+
+        else:
+            review = self.model.objects.all()
+        return review
+
 
 # Review Detail view
 def review_detail(request, id):
@@ -55,7 +72,7 @@ def review_detail(request, id):
     if request.method == "POST" and request.user.is_authenticated:
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            
+
             # Assign the logged-in user to the comment
             comment = comment_form.save(commit=False)
             comment.author = request.user
