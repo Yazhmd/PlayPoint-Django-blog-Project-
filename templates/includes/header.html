@@ -1,131 +1,109 @@
- {% load static %}
+{% load static %}
 
- <header>
+<header>
+  {% with request.resolver_match.url_name as url_name %}
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
 
-   {% with request.resolver_match.url_name as url_name %}
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <!-- Logo image -->
+        <img src="{% static 'images/logo_white_full_playpoint-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
+          class="logo">
 
-   <nav class="navbar navbar-expand-lg fixed-top">
-     <div class="container-fluid">
+      </a>
 
-       <a class="navbar-brand" href="{% url 'home' %}">
-         <img src="{% static 'images/logo_white_full_playpoint-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
-           class="logo">
-       </a>
-
-       <a href="{% url 'home' %}">
-         <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
-           class="logo-alt-icon">
-       </a>
-
-       <a href="{% url 'home' %}">
-         <img src="{% static 'images/White_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
-           class="logo-title">
-       </a>
+      <!-- logo icon only -->
+      <a href="{% url 'home' %}">
+        <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
+          class="logo-alt-icon">
+      </a>
 
 
-       <!-- Navigation Links -->
-       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-           <li class="nav-item">
-             <a class="nav-link  " href="{% url 'home' %}">Home</a>
-           </li>
-
-           <li class="nav-item">
-             <a class="nav-link {% if url_name == 'review' %}active{% endif %}" href=" {% url 'reviews' %}">Reviews</a>
-           </li>
-
-           <li class="nav-item">
-             <a class="nav-link {% if url_name == '' %}active{% endif %}" href=" {% url 'reviews' %}">About Us</a>
-           </li>
-
-           {% if request.user.is_authenticated %}
-           <li class="nav-item">
-             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}"
-               href="/account/logout">Logout</a>
-           </li>
+      <!-- Logo white title -->
+      <a href="{% url 'home' %}">
+        <img src="{% static 'images/White_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
+          class="logo-title">
+      </a>
 
 
-           <a class="  {% if url_name == 'accounts_logout' %}active{% endif %}" href="/account/logout">
-             <button class="btn btn-secondary ">
-               Dashboard
-             </button>
-           </a>
+      <!--checkbox Toggler  -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'reviews' %}">Reviews</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link  " href="{% url 'home' %}#about-section">About Us</a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link  " href="/account/logout">Logout</a>
+          </li>
+
+          <a href="/account/logout">
+            <button class="btn btn-secondary">Dashboard</button>
+          </a>
+
+          <!-- Register/Login buttons -->
+
+          {% else %}
+          <li class="nav-item me-3">
+            <a class="btn btn-md btn-primary rounded-pill" href="/account/signup">Register</a>
+          </li>
 
 
+          <li class="nav-item me-3">
+            <a class="btn btn-md btn-secondary rounded-pill" href="/account/login">Login</a>
+          </li>
+          {% endif %}
+        </ul>
 
-           {% else %}
-           <li class="nav-item">
-             <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/account/signup">Register
+        {% if request.user.is_authenticated %}
 
-             </a>
-           </li>
+        <!-- User profile dropdowm -->
+        <div class="dropdown">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="true">
+            <img src="https://github.com/mdo.png" alt="Profile" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><a class="dropdown-item" href="#">Profile Settings</a></li>
 
-           <li class="nav-item">
-             <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/account/login">Login</a>
-           </li>
+            <li><a class="dropdown-item" href="/account/logout">Log out</a></li>
 
+          </ul>
+        </div>
 
-           {% endif %}
+        <a href="{% url 'add_review' %}">
+          <button class="btn btn-success add-review-button">+ Create New Review</button>
+        </a>
+        {% else %}
+        <a href="/account/login">
+          <button class="btn btn-success add-review-button">Write a Review</button>
+        </a>
+        {% endif %}
 
-         </ul>
+        <hr>
 
-
-         {% if request.user.is_authenticated %}
-
-         <a href="{% url 'add_review' %} ">
-           <button class="btn btn-success add-review-button">
-             + Create New Review
-           </button>
-         </a>
-
-         <!-- Account profile nav dropdown -->
-         <div class="flex-shrink-0 dropdown">
-           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
-             aria-expanded="true">
-             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-           </a>
-           <ul class="dropdown-menu text-small shadow">
-             <li><a class="dropdown-item" href="#">New project...</a></li>
-             <li><a class="dropdown-item" href="#">Settings</a></li>
-             <li><a class="dropdown-item" href="#">Profile</a></li>
-             <li>
-               <hr class="dropdown-divider">
-             </li>
-             <li><a class="dropdown-item" href="#">Sign out</a></li>
-           </ul>
-         </div>
-
-         {% else %}
-         <a href="/account/login">
-           <button class="btn btn-success add-review-button">
-             Write a Review
-           </button>
-         </a>
-
-         {% endif %}
-
-
-
-         <hr>
-         <!-- Form Search bar -->
-         <div class="search-and-button">
-           <form class="d-flex search-form" role="search" method="GET" action="{% url 'reviews'   %}">
-             <input type="search" class="form-control me-2" name="q" placeholder="Search..." aria-label="Search">
-           </form>
-         </div>
-       </div>
-     </div>
-
-
-
-
-   </nav>
-
-   {% endwith %}
-
- </header>
+        <!-- Search bar -->
+        <div class="search-and-button">
+          <form class="d-flex search-form" role="search" method="GET" action="{% url 'reviews' %}">
+            <input type="search" class="form-control me-2" name="q" placeholder="Search..." aria-label="Search">
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {% endwith %}
+</header>

@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 
 }
 
@@ -27,7 +27,7 @@
 
     /* colours */
 
-    /* Utils */
+   
 
     --small-box-shadow: 1 -1px 7px 0 rgba(0, 0, 0, 0.967);
     border: 1px solid black;
@@ -179,9 +179,11 @@ footer::before {
 @keyframes rainbow-flow {
     0% {
         background-position: 0% 50%;
+
     }
 
     100% {
+
         background-position: 100% 50%;
     }
 }
