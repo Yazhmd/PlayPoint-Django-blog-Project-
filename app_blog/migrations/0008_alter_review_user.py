@@ -10,13 +10,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('app_blog', '0007_alter_review_review_alter_review_user'),
+        ("app_blog", "0007_alter_review_review_alter_review_user"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='user',
-            field=models.ForeignKey(blank=True, default=app_blog.models.get_default_user, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='review_owner', to=settings.AUTH_USER_MODEL),
+            model_name="review",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                default=app_blog.models.get_default_user,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="review_owner",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

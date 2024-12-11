@@ -1,11 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect , reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 from django.views.generic import (
-    TemplateView, CreateView, ListView,
-    DetailView, DeleteView, UpdateView,
+    TemplateView,
+    CreateView,
+    ListView,
+    DetailView,
+    DeleteView,
+    UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -20,16 +24,18 @@ from .forms import ReviewForm, CommentForm
 # HomePage view
 class HomePage(TemplateView):
     """Displays the home page."""
-    template_name = 'base.html'
+
+    template_name = "base.html"
 
 
 # AddReview view (CreateView)
 class AddReview(LoginRequiredMixin, CreateView):
     """View to add a new review."""
-    template_name = 'app_blog/add_review.html'
+
+    template_name = "app_blog/add_review.html"
     model = Review
     form_class = ReviewForm
-    success_url = reverse_lazy('reviews')
+    success_url = reverse_lazy("reviews")
 
     def form_valid(self, form):
         """Automatically assign the logged-in user to the review."""
@@ -40,9 +46,10 @@ class AddReview(LoginRequiredMixin, CreateView):
 # Reviews List view (ListView)
 class Reviews(ListView):
     """View all approved reviews."""
+
     model = Review
     template_name = "app_blog/reviews.html"
-    context_object_name = 'reviews'
+    context_object_name = "reviews"
     paginate_by = 6
 
     def get_queryset(self):
@@ -50,14 +57,14 @@ class Reviews(ListView):
         return Review.objects.filter(status=1)
 
     def get_queryset(self, **kwargs):
-        query = self.request.GET.get('q')
+        query = self.request.GET.get("q")
         if query:
             review = self.model.objects.filter(
-                Q(title__icontains=query) |
-                Q(review__icontains=query) |
-                Q(genre__icontains=query) |
-                Q(game_platform__icontains=query) |
-                Q(game_console__icontains=query)
+                Q(title__icontains=query)
+                | Q(review__icontains=query)
+                | Q(genre__icontains=query)
+                | Q(game_platform__icontains=query)
+                | Q(game_console__icontains=query)
             )
 
         else:
@@ -83,29 +90,33 @@ def review_detail(request, id):
             comment.review = review
             comment.save()
             messages.add_message(
-                request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
+                request, messages.SUCCESS, "Comment submitted and awaiting approval"
             )
-            return redirect('review_detail', id=review.id)
+            return redirect("review_detail", id=review.id)
     else:
         comment_form = CommentForm(data=request.POST)
         print("About to render template")
 
         comment_count = review.comments.filter(approved=True).count()
 
-    return render(request, 'app_blog/review_detail.html', {
-        'review': review,
-        'comment_form': comment_form,
-        "comment_count": comment_count,
-    })
+    return render(
+        request,
+        "app_blog/review_detail.html",
+        {
+            "review": review,
+            "comment_form": comment_form,
+            "comment_count": comment_count,
+        },
+    )
 
 
 # DeleteReview view (DeleteView)
 class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """View to delete a review."""
+
     model = Review
-    template_name = 'app_blog/review_confirm_delete.html'
-    success_url = reverse_lazy('reviews')
+    template_name = "app_blog/review_confirm_delete.html"
+    success_url = reverse_lazy("reviews")
 
     def test_func(self):
         """Ensure only the owner can delete their review."""
@@ -115,10 +126,11 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # EditReview view (UpdateView)
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """View to edit a review."""
+
     model = Review
-    template_name = 'app_blog/edit_review.html'
+    template_name = "app_blog/edit_review.html"
     form_class = ReviewForm
-    success_url = reverse_lazy('reviews')
+    success_url = reverse_lazy("reviews")
 
     def test_func(self):
         """Ensure only the owner can edit their review."""
@@ -126,6 +138,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 # Comment edit
+
 
 def comment_edit(request, slug, comment_id):
     """
@@ -143,12 +156,11 @@ def comment_edit(request, slug, comment_id):
             comment.post = post
             comment.approved = False
             comment.save()
-            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+            messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.add_message(request, messages.ERROR,
-                                 'Error updating comment!')
+            messages.add_message(request, messages.ERROR, "Error updating comment!")
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse("review_detail", args=[slug]))
 
 
 # Comment Delete
@@ -164,9 +176,10 @@ def comment_delete(request, slug, comment_id):
 
     if comment.author == request.user:
         comment.delete()
-        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+        messages.add_message(request, messages.SUCCESS, "Comment deleted!")
     else:
-        messages.add_message(request, messages.ERROR,
-                             'You can only delete your own comments!')
+        messages.add_message(
+            request, messages.ERROR, "You can only delete your own comments!"
+        )
 
-    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    return HttpResponseRedirect(reverse("review_detail", args=[slug]))

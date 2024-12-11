@@ -7,37 +7,37 @@ import djrichtextfield.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_blog', '0003_alter_review_title_alter_review_user'),
+        ("app_blog", "0003_alter_review_title_alter_review_user"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='review',
-            name='description',
+            model_name="review",
+            name="description",
         ),
         migrations.AddField(
-            model_name='review',
-            name='genre',
-            field=models.CharField(default='', max_length=500),
+            model_name="review",
+            name="genre",
+            field=models.CharField(default="", max_length=500),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='game_console',
-            field=models.CharField(default='', max_length=100),
+            model_name="review",
+            name="game_console",
+            field=models.CharField(default="", max_length=100),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='image_alt',
-            field=models.CharField(default='', max_length=100),
+            model_name="review",
+            name="image_alt",
+            field=models.CharField(default="", max_length=100),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='review',
-            field=djrichtextfield.models.RichTextField(default='', max_length=10000),
+            model_name="review",
+            name="review",
+            field=djrichtextfield.models.RichTextField(default="", max_length=10000),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='title',
-            field=models.CharField(default='', max_length=200),
+            model_name="review",
+            name="title",
+            field=models.CharField(default="", max_length=200),
         ),
     ]

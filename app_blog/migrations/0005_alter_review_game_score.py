@@ -7,13 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_blog', '0004_remove_review_description_review_genre_and_more'),
+        ("app_blog", "0004_remove_review_description_review_genre_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='game_score',
-            field=models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(10)]),
+            model_name="review",
+            name="game_score",
+            field=models.IntegerField(
+                default=0,
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(10),
+                ],
+            ),
         ),
     ]

@@ -10,18 +10,23 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('app_blog', '0006_alter_review_game_platform_alter_review_game_score'),
+        ("app_blog", "0006_alter_review_game_platform_alter_review_game_score"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='review',
-            field=models.TextField(default='', max_length=10000),
+            model_name="review",
+            name="review",
+            field=models.TextField(default="", max_length=10000),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='user',
-            field=models.ForeignKey(default=app_blog.models.get_default_user, on_delete=django.db.models.deletion.CASCADE, related_name='review_owner', to=settings.AUTH_USER_MODEL),
+            model_name="review",
+            name="user",
+            field=models.ForeignKey(
+                default=app_blog.models.get_default_user,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="review_owner",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

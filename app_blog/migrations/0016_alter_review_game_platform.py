@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_blog', '0015_comment_updated_on'),
+        ("app_blog", "0015_comment_updated_on"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='game_platform',
-            field=models.CharField(choices=[('PC', 'PC'), ('PlayStation', 'PlayStation'), ('XBOX', 'XBOX'), ('Nintendo', 'Nintendo'), ('Mobile', 'Mobile'), ('Other', 'Other')], default='PC', max_length=50),
+            model_name="review",
+            name="game_platform",
+            field=models.CharField(
+                choices=[
+                    ("PC", "PC"),
+                    ("PlayStation", "PlayStation"),
+                    ("XBOX", "XBOX"),
+                    ("Nintendo", "Nintendo"),
+                    ("Mobile", "Mobile"),
+                    ("Other", "Other"),
+                ],
+                default="PC",
+                max_length=50,
+            ),
         ),
     ]

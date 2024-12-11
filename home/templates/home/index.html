@@ -135,7 +135,7 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>1.)
+                            <strong>1.) You are already a registered user and are logged in 
 
 
 
@@ -143,8 +143,8 @@
 
 
 
-                                <br>
-                                <br>
+                         
+                     
                                 {% else %}
 
                                 <a href="{% url 'account_signup' %}"> sign up</a> , create and set up an
@@ -179,10 +179,12 @@
                                 first)
                                 <br>
                                 If required you can also
-                                <button class="btn btn-sm btn-primary w-23">Edit </button>
-                                and
-                                <button class="btn btn-sm btn-danger w-23">Delete </button>
-                                any comments made.
+                                <button class="btn btn-sm btn-edit w-23"  >Edit</button>
+
+                                and 
+
+                                <button class="btn btn-sm btn-delete w-23"  >Delete</button>
+                                any comments that you have made.
 
 
                             </strong>

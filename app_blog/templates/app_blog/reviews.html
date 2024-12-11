@@ -23,10 +23,11 @@
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
 
 
-
-            <div class="card-body">
-                <p class="card-title game-title">{{ review.title }} </p>
-                <p class="card-text">{{ review.description|truncatechars:100 }}</p>
+            <div class="review-img-card">
+                <div class="card-body">
+                    <p class="card-title game-title">{{ review.title }} </p>
+                    <p class="card-text">{{ review.description|truncatechars:100 }}</p>
+                </div>
             </div>
         </div>
     </a>

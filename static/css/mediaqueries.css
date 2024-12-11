@@ -157,6 +157,13 @@
      }
 
 
+
+     /* Card For smaller size screens */
+
+
+
+
+
      /* Footer */
      footer {
          display: flex;
@@ -244,3 +251,6 @@
      }
 
  }
+
+
+ 

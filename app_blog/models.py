@@ -12,16 +12,16 @@ from django.core.exceptions import ValidationError
 STATUS = ((0, "Draft"), (1, "Published"))
 
 GAME_PLATFORM = [
-    ('PC', 'PC'),
-    ('PlayStation', 'PlayStation'),
-    ('XBOX', 'XBOX'),
-    ('Nintendo', 'Nintendo'),
-    ('Mobile', 'Mobile'),
-    ('Other', 'Other'),
+    ("PC", "PC"),
+    ("PlayStation", "PlayStation"),
+    ("XBOX", "XBOX"),
+    ("Nintendo", "Nintendo"),
+    ("Mobile", "Mobile"),
+    ("Other", "Other"),
 ]
 
 GAME_CONSOLE = [
-    ('', 'None'),
+    ("", "None"),
 ]
 
 
@@ -29,32 +29,39 @@ def get_default_user():
     # Return None when no user is authenticated
     return None
 
+
 # Review Model---------------------------------------------------------------->
 
 
 class Review(models.Model):
     user = models.ForeignKey(
-        User, related_name='review_owner', on_delete=models.CASCADE,
-        null=True, blank=True
+        User,
+        related_name="review_owner",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     genre = models.CharField(max_length=250)
     review = models.TextField(max_length=10000)
     images = ResizedImageField(
-        size=[400, None], quality=75, upload_to='app_blog/',
-        force_format='WEBP', blank=True, null=True,
-        default='app_blog/default_image.webp'
+        size=[400, None],
+        quality=75,
+        upload_to="app_blog/",
+        force_format="WEBP",
+        blank=True,
+        null=True,
+        default="app_blog/default_image.webp",
     )
     image_alt = models.CharField(max_length=100)
 
-    game_platform = models.CharField(
-        max_length=50, choices=GAME_PLATFORM, default='PC')
-    game_console = models.CharField(
-        max_length=100, null=False, blank=False, default="")
+    game_platform = models.CharField(max_length=50, choices=GAME_PLATFORM, default="PC")
+    game_console = models.CharField(max_length=100, null=False, blank=False, default="")
 
     game_score = models.IntegerField(
-        choices=[(i, str(i)) for i in range(11)], default=0)
+        choices=[(i, str(i)) for i in range(11)], default=0
+    )
 
     posted_date = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -62,10 +69,10 @@ class Review(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ('-posted_date',)
+        ordering = ("-posted_date",)
         indexes = [
-            models.Index(fields=['status']),
-            models.Index(fields=['-posted_date']),
+            models.Index(fields=["status"]),
+            models.Index(fields=["-posted_date"]),
         ]
 
     def save(self, *args, **kwargs):
@@ -75,7 +82,7 @@ class Review(models.Model):
 
     def clean(self):
         if not (0 <= self.game_score <= 10):
-            raise ValidationError('Game score must be between 0 and 10.')
+            raise ValidationError("Game score must be between 0 and 10.")
         super().clean()
 
     def __str__(self):
