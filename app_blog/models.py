@@ -16,6 +16,7 @@ GAME_PLATFORM = [
     ('PlayStation', 'PlayStation'),
     ('XBOX', 'XBOX'),
     ('Nintendo', 'Nintendo'),
+    ('Mobile', 'Mobile'),
     ('Other', 'Other'),
 ]
 
@@ -38,7 +39,7 @@ class Review(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
-    genre = models.CharField(max_length=500)
+    genre = models.CharField(max_length=250)
     review = models.TextField(max_length=10000)
     images = ResizedImageField(
         size=[400, None], quality=75, upload_to='app_blog/',
@@ -46,8 +47,7 @@ class Review(models.Model):
         default='app_blog/default_image.webp'
     )
     image_alt = models.CharField(max_length=100)
-    
-    
+
     game_platform = models.CharField(
         max_length=50, choices=GAME_PLATFORM, default='PC')
     game_console = models.CharField(

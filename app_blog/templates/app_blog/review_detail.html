@@ -5,8 +5,12 @@
 {% block title %}Review Detail - {{ review.title }}{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-    <div class="d-flex align-items-center justify-content-between bg-light rounded shadow-sm p-4">
+
+<a href="{% url 'reviews' %}" class="btn btn-success w-23"> Back to Reviews   </a>
+ 
+
+<div class="container py-4   ">
+    <div class="d-flex align-items-center justify-content-between bg-light rounded shadow-sm p-4  review-box">
         <!-- Game Image on the Left -->
         <div class="review-img me-4" style="flex-shrink: 0;">
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="img-fluid" style="max-width: 250px;">
@@ -37,8 +41,8 @@
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
             <div class="text-center mt-3">
-                <a href="{% url 'edit_review' review.id %}" class="btn btn-primary w-25">Edit</a>
-                <a href="{% url 'delete_review' review.id %}" class="btn btn-danger w-25">Delete</a>
+                <a href="{% url 'edit_review' review.id %}" class="btn btn-primary w-23">Edit</a>
+                <a href="{% url 'delete_review' review.id %}" class="btn btn-danger w-23">Delete</a>
             </div>
             {% endif %}
         </div>

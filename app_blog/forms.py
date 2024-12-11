@@ -21,13 +21,13 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'review': SummernoteWidget(),
 
-            'genre': forms.Textarea(attrs={'rows': 5}),
+            
         }
         labels = {
             'title': 'Game Title',
             'genre': 'Genre',
             'review': 'Write Review',
-            'images': 'Game Image',
+            'images': 'Game Image (Game Cover)',
             'image_alt': 'Describe Game Image',
             'game_platform': 'Pick Game Platform',
             'game_console': 'Game Console Name',

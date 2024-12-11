@@ -14,7 +14,7 @@
             style="height: 10rem;">
 
         <h1>Welcome to PlayPoint</h1>
-        
+
 
         <p class="col-lg-8 mx-auto fs-5 ">
             Dive into our curated collection of reviews for the latest and greatest games.
@@ -35,7 +35,7 @@
             {% endif %}
             <a href="#listview-title">
                 <button class="btn btn-secondary btn-lg px-4 rounded-pill" type="button">
-                    Look at Reviews
+                    Latest Reviews
                 </button>
             </a>
         </div>
@@ -47,26 +47,193 @@
 
 
 
-<div  id="about-section"  class="container col-xxl-8 px-4 py-5">
+<div id="about-section" class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <img src="{% static 'images/Hero_image_characters-removebg-preview.png' %}"
-                class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+
+            <img src="{% static 'images/Hero_image_characters-removebg-preview.webp' %}"
+                class="d-block mx-lg-auto align-items-center img-fluid about-image" alt="Bootstrap Themes" width="700"
+                height="500" loading="lazy">
+
         </div>
         <div class="col-lg-6">
-            
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">What is </h1>
 
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-                popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-                extensive prebuilt components, and powerful JavaScript plugins.</p>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">About PlayPoint </h1>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+            <p class="lead">PlayPoint is the ultimate hub for gaming enthusiasts, offering insightful reviews, engaging
+                discussions, and a passionate community focused on video games. With a dedication to providing honest
+                and detailed reviews from users themselves. So what are you waiting for? </p>
+
+
+
+            {% if request.user.is_authenticated %}
+
+            <a href="{% url 'add_review' %}">
+
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Get Started</button>
+
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'account_signup' %}">
+
+                <button type="button" class="btn btn-success btn-lg px-4 me-md-2">Register</button>
+
+            </a>
+
+
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-lg px-4">Login</button>
+            </a>
+
+            {% endif %}
+
+
+            <a href="#listview-title">
+                <button type="button" class="btn btn-warning btn-lg px-4">See Latest Reviews </button>
+            </a>
+
+
+            <!-- FAQ accordian bootstrap -->
+            <div class="accordion" id="accordionExample">
+
+                <br>
+                <h1>FAQs</h1>
+
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How Can This Website Help Me?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong> PlayPoint helps gamers make
+                                informed decisions on both new
+                                and retro titles through other own user reviews.
+                                <br>
+                                Writing reviews helps express your thoughts and opinions on a particular game and can
+                                start a discussion amongst other gamers alike through commenting.
+                                <br>
+                                <br>
+                                Whether you're a console/PC veteran or a casual mobile player, PlayPoint is here to
+                                celebrate the world of gaming and create connections through a shared appreciation for
+                                interactive media.
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Where Do I Start?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>1.)
+
+
+
+                                {% if request.user.is_authenticated %}
+
+                                <a href="{% url 'login' %}">login </a> to your account.
+
+                                <br>
+                                <br>
+                                {% else %}
+
+                                <a href="{% url 'account_signup' %}"> sign up</a> , create and set up an
+                                account/profile (Please read the terms and conditions and privacy policy).
+                                <br>
+                                {% endif %}
+                                <br>
+                                2.) Create a review by clicking on the (+ New Review button)
+                                <button class="btn btn-sm btn-success   " type="button">+ New Review</button>
+                                and fill in all the required fields (Game title, image, genre etc.) and view your review
+                                once published.
+                                You can also edit and delete any reviews if you so wish. by clicking on the
+
+                                <button class="btn btn-sm btn-primary w-23">Edit </button>
+                                and
+                                <button class="btn btn-sm btn-danger w-23">Delete </button>
+                                buttons.
+
+                                <br>
+                                <br>
+
+                                3.) Make sure to also view and also comment on other users reviews as well as your own
+                                and start conversations amongst users.
+                                <br>
+                                If required you can also
+                                <button class="btn btn-sm btn-primary w-23">Edit </button>
+                                and
+                                <button class="btn btn-sm btn-danger w-23">Delete </button>
+                                any comments made.
+
+
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Terms and Coditions
+                            (Privacy Policy)
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+
+                            <strong> 1.) User-Generated Content:</strong> Users are responsible for the reviews,
+                            ratings, and comments
+                            they post. PlayPoint reserves the right to remove content that is inappropriate,
+                            offensive, or violates community guidelines.
+                            <br>
+                            <br>
+                            <strong> 2.) Data Collection and Use:</strong> PlayPoint collects user data, such as
+                            account information and browsing activity, to personalize the user experience and
+                            improve the platform. All data handling complies with relevant data protection laws,
+                            including GDPR and CCPA.
+                            <br>
+                            <br>
+                            <strong> 3.) Intellectual Property Rights: </strong> Reviews and other content posted by
+                            users remain their property, but PlayPoint retains a license to use, display, and
+                            distribute the content on the platform.
+
+                            <br>
+                            <br>
+
+                            <strong> 4.) Limitations of Liability: </strong> PlayPoint is not responsible for the
+                            accuracy of user reviews or third-party content linked on the platform and does not
+                            endorse the quality of games reviewed. Users rely on the information at their own
+                            discretion.
+                            <br>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+
+
+
+
+
     </div>
+</div>
 </div>
 
 

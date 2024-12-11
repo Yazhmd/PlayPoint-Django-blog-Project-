@@ -1,0 +1,246 @@
+ /* Media queries for review detail page section */
+
+ /* Mobile devices with 300 width  */
+ @media (max-width: 300px) {
+     .review-details {
+         padding-left: 10px;
+         padding-right: 10px;
+     }
+
+     .review-img {
+         margin-bottom: 15px;
+         text-align: center;
+     }
+
+     .review-img img {
+         max-width: 180px;
+
+         margin: 0 auto;
+     }
+
+     .review-box {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .review-details h1 {
+         font-size: 1.2rem;
+
+         text-align: center;
+     }
+
+     .review-details p {
+         font-size: 0.9rem;
+
+     }
+
+     .row {
+         margin-bottom: 10px;
+     }
+
+     .btn {
+         width: 100%;
+
+         margin-bottom: 10px;
+     }
+ }
+
+
+
+ @media (max-width: 767px) {
+     .review-details {
+         padding-left: 10px;
+         padding-right: 10px;
+     }
+
+     .review-img {
+         margin-bottom: 15px;
+         text-align: center;
+     }
+
+     .review-img img {
+         max-width: 200px;
+         margin: 0 auto;
+     }
+
+     .review-box {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .review-details h1 {
+         font-size: 1.5rem;
+     }
+
+     .review-details p {
+         font-size: 1rem;
+     }
+
+     .row {
+         margin-bottom: 15px;
+     }
+
+     .btn {
+         width: 100%;
+         margin-bottom: 10px;
+     }
+ }
+
+ /* tablet view */
+ @media (min-width: 768px) {
+     .review-img img {
+         max-width: 220px;
+     }
+
+     .review-details h1 {
+         font-size: 1.75rem;
+     }
+
+     .review-details p {
+         font-size: 1.1rem;
+     }
+
+     .review-box {
+         flex-direction: row;
+         justify-content: flex-start;
+     }
+
+     .review-details {
+         padding-left: 15px;
+         padding-right: 15px;
+     }
+
+     .btn {
+         width: auto;
+         margin-bottom: 10px;
+     }
+ }
+
+
+
+
+ @media (min-width: 650px) and (max-width: 991px) {
+
+     /* Alternative logo and title between 650px and 991px */
+     img.logo {
+         display: none;
+     }
+
+     .logo-alt-icon {
+         display: block;
+         width: 10rem;
+     }
+
+     .logo-title {
+         display: block;
+         width: 20rem;
+     }
+ }
+
+ @media (max-width: 649px) {
+
+     /* Navbar */
+
+     /* Reverts back to initial logo for widths below 650px */
+     a.navbar-brand img.logo {
+         display: block;
+
+         width: 7rem;
+
+         margin-left: 50px;
+     }
+
+     .logo-alt-icon,
+     .logo-title {
+         display: none;
+
+     }
+
+
+     /* Footer */
+     footer {
+         display: flex;
+         flex-direction: column;
+         /* Stacks items vertically */
+
+         align-items: center;
+
+         text-align: center;
+
+     }
+
+     footer .social-icons-container {
+         order: 1;
+         /* Move social icons to the top */
+         margin-bottom: 1rem;
+     }
+
+     footer .links-container {
+         order: 2;
+         /* Place links in the middle */
+         margin-bottom: 1rem;
+
+         flex-direction: column;
+
+         gap: 0.5rem;
+
+     }
+
+     footer .logo-copyright-container {
+
+         order: 3;
+         /* Place logo and copyright at the bottom in flexbox */
+         margin-top: auto;
+
+         text-align: center;
+
+         padding-top: 1rem;
+     }
+
+
+     footer img {
+         margin: 0 auto;
+
+     }
+
+
+ }
+
+
+ /* Larger screens */
+ @media (min-width: 992px) {
+     .review-box {
+         flex-direction: row;
+         justify-content: space-between;
+     }
+
+     .review-img img {
+         max-width: 250px;
+     }
+
+     .review-details h1 {
+         font-size: 2rem;
+     }
+
+     .review-details p {
+         font-size: 1.2rem;
+     }
+
+     .btn {
+         width: auto;
+     }
+
+
+
+     .logo-alt-icon,
+     .logo-title {
+
+         display: none;
+     }
+
+     a.navbar-brand img.logo {
+
+         display: block;
+     }
+
+ }

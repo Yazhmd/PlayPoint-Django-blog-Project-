@@ -27,6 +27,9 @@ urlpatterns = [
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('summernote/', include('django_summernote.urls')),
 
+
+    # Apps urls
+    
     path('app_blog/', include('app_blog.urls')),
     path('', include('home.urls')),
 

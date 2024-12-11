@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    text-decoration: none;
 
 }
 
@@ -27,7 +27,7 @@
 
     /* colours */
 
-   
+
 
     --small-box-shadow: 1 -1px 7px 0 rgba(0, 0, 0, 0.967);
     border: 1px solid black;
@@ -175,7 +175,7 @@ footer::before {
     animation: rainbow-flow 6s linear infinite;
 }
 
-/* Keyframes for animation */
+/* Keyframes for footer border animation */
 @keyframes rainbow-flow {
     0% {
         background-position: 0% 50%;
@@ -226,7 +226,16 @@ footer::before {
 }
 
 
+
+ 
+
+
+
+
 /* Sign in/up Form */
+
+
+
 
 .form {
 
@@ -237,107 +246,4 @@ footer::before {
     box-shadow: var(--small-box-shadow);
     border-radius: 5px;
 
-}
-
-
-/* Media Queries ----------------------------------------------------------------------------------->*/
-
-@media (min-width: 650px) and (max-width: 991px) {
-
-    /* Alternative logo and title between 650px and 991px */
-    a.navbar-brand img.logo {
-        display: none;
-    }
-
-    .logo-alt-icon {
-        display: block;
-        width: 10rem;
-    }
-
-    .logo-title {
-        display: block;
-        width: 20rem;
-    }
-}
-
-@media (max-width: 649px) {
-
-    /* Navbar */
-    /* Reverts back to initial logo for widths below 650px */
-    a.navbar-brand img.logo {
-        display: block;
-
-        width: 7rem;
-
-        margin-left: 50px;
-    }
-
-    .logo-alt-icon,
-    .logo-title {
-        display: none;
-
-    }
-
-
-    /* Footer */
-    footer {
-        display: flex;
-        flex-direction: column;
-        /* Stacks items vertically */
-
-        align-items: center;
-
-        text-align: center;
-
-    }
-
-    footer .social-icons-container {
-        order: 1;
-        /* Move social icons to the top */
-        margin-bottom: 1rem;
-    }
-
-    footer .links-container {
-        order: 2;
-        /* Place links in the middle */
-        margin-bottom: 1rem;
-
-        flex-direction: column;
-
-        gap: 0.5rem;
-
-    }
-
-    footer .logo-copyright-container {
-
-        order: 3;
-        /* Place logo and copyright at the bottom in flexbox */
-        margin-top: auto;
-
-        text-align: center;
-
-        padding-top: 1rem;
-    }
-
-
-    footer img {
-        margin: 0 auto;
-
-    }
-
-
-}
-
-@media (min-width: 992px) {
-
-    .logo-alt-icon,
-    .logo-title {
-
-        display: none;
-    }
-
-    a.navbar-brand img.logo {
-
-        display: block;
-    }
 }
