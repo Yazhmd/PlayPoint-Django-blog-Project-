@@ -25,6 +25,8 @@ urlpatterns = [
     path(
         "edit/<int:pk>/", views.EditReview.as_view(), name="edit_review"
     ),  # Edit review
+
+
     path(
         "<slug:slug>/edit_comment/<int:comment_id>",
         views.comment_edit,

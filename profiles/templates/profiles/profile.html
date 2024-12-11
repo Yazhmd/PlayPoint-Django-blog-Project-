@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile - {{profile.user.username}}{% endblock %}
+
+{% block content %}
+<div class="container p-4">
+    <div class="profile">
+        <div class="info">
+            <div class="profile-img text-center">
+                {% if profile.image.url is not none %}
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image">
+                {% else %}
+                <img src="{% static '/icons/no-photography-icon.svg' %}" alt="Image not found icon">
+                {% endif %}
+            </div>
+            <h1>{{ profile.user.username }}</h1>
+            <p><strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}</p>
+
+            <p><strong>Reviews: </strong>{{ profile.user.review_owner.count }}</p>
+            
+            <p><strong>Comments: </strong>{{ profile.user.comments.count }}</p>
+
+            {% if profile.bio is not none %}
+            {{ profile.bio|safe }}
+            {% endif %}
+
+            {% if request.user == profile.user %}
+            <div>
+                <button id="myBtn" class="btn btn-primary w-25 mb-4">Edit</button>
+            </div>
+            <div>
+                <a href="{% url 'meal_planner' %}" class="btn btn-primary w-25 mb-4">Meals</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="profile-recipes">
+            <h2 class="text-center pb-4">Latest Recipes</h2>
+            {% for recipe in profile.user.recipe_owner.all %}
+            <a href="{% url 'recipe_detail' recipe.id %}">
+                <h3>{{ recipe.title }}</h3>
+            </a>
+            {{ recipe.posted_date }}
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal mt-5">
+        <!-- Modal content -->
+        <div class="modal-content container">
+            <span class="close fs-1 pe-2">&times;</span>
+            <form method="POST" action="{% url 'edit_profile' request.user.id %}" class="mb-2 p-2"
+                enctype="multipart/form-data">
+                <h2 class="text-center fs-4">Edit Profile</h2>
+                {% csrf_token %}
+                {{ form|crispy }}
+                {{ form.media }}
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary w-25">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

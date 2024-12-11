@@ -8,7 +8,12 @@
     <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
         <h1 class="h4 text-center mb-3">Confirm Review Deletion</h1>
         <p class="text-center text-muted mb-4">
-            Are you sure you want to delete the review for "<strong>{{ object.title }}</strong>"?
+            Are you sure you want to delete the review for
+            <br>
+            "<strong>{{ object.title }}</strong>"?
+            <br>
+            <br>
+            <strong>Warning:</strong> This action cannot be undone
         </p>
         <form method="post" class="d-flex justify-content-center">
             {% csrf_token %}

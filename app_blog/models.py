@@ -52,7 +52,7 @@ class Review(models.Model):
         force_format="WEBP",
         blank=True,
         null=True,
-        default="app_blog/default_image.webp",
+        default="",
     )
     image_alt = models.CharField(max_length=100)
 

@@ -35,11 +35,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link   {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="{% url 'reviews' %}">Reviews</a>
+            <a class="nav-link {% if url_name == 'reviews' %}active{% endif %}" href="{% url 'reviews' %}">Reviews</a>
           </li>
 
           <li class="nav-item">
@@ -48,11 +48,13 @@
 
           {% if request.user.is_authenticated %}
           <li class="nav-item me-3">
-            <a class=" btn btn-sm btn-warning rounded-pill  " href="/account/logout">Logout</a>
+            <a class=" btn btn-sm btn-warning rounded-pill {% if url_name == 'account_logout' %}active{% endif %} "
+              href="{% url 'account_logout' %}">Logout</a>
           </li>
 
           <li class="nav-item me-3">
-            <a href="/account/logout">
+            <a class="nav-link {% if url_name == 'profile' %}active{% endif %}"
+              href="{% url 'profile' request.user.id %}">
               <button class="btn btn-secondary">Dashboard</button>
             </a>
           </li>
@@ -60,12 +62,14 @@
 
           {% else %}
           <li class="nav-item me-3">
-            <a class="btn btn-md btn-primary rounded-pill" href="/account/signup">Register</a>
+            <a class="btn btn-md btn-primary rounded-pill {% if url_name == 'account_signup' %}active{% endif %}"
+              href="{% url 'account_signup' %}">Register</a>
           </li>
 
 
           <li class="nav-item me-3">
-            <a class="btn btn-md btn-secondary rounded-pill" href="/account/login">Login</a>
+            <a class="btn btn-md btn-secondary rounded-pill  {% if url_name == 'login' %}active{% endif %}"
+              href=" {% url 'login' %}">Login</a>
           </li>
           {% endif %}
         </ul>
@@ -92,7 +96,7 @@
         </div>
 
         {% else %}
-        <a href="/account/login">
+        <a href=" {% url 'reviews' %}">
           <button class="btn btn-success add-review-button">Write a Review</button>
         </a>
         {% endif %}

@@ -25,8 +25,10 @@ for (let button of editButtons) {
 
 
 
-const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+// const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+
 const deleteButtons = document.getElementsByClassName("btn-delete");
+
 const deleteConfirm = document.getElementById("deleteConfirm");
 
 
@@ -42,10 +44,15 @@ const deleteConfirm = document.getElementById("deleteConfirm");
  * - Displays a confirmation modal (`deleteModal`) to prompt 
  * the user for confirmation before deletion.
  */
+ 
+
+const reviewSlug = document.querySelector("#review-slug").dataset.slug;  
+
 for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id");
-        deleteConfirm.href = `delete_comment/${commentId}`;
-        deleteModal.show();
+        deleteConfirm.href = `/reviews/${reviewSlug}/delete_comment/${commentId}`;
+        // deleteModal.show();
     });
 }
+

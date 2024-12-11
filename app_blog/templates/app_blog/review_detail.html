@@ -37,7 +37,7 @@
             </div>
 
             <p><strong>Review: </strong>{{ review.review | safe }}</p>
-
+            <input type="hidden" value="{{ review.slug }}" id="review-slug">
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
             <div class="text-center mt-3">
@@ -70,11 +70,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="p-2 comments
+
+
+
+
                         {% if not comment.approved and comment.author == user %}
                             faded
                         {% elif not comment.approved %}
                             d-none
                         {% endif %}">
+
                         <p class="font-weight-bold">
                             {{ comment.author }}
                             <span class="font-weight-normal">
@@ -93,7 +98,8 @@
                         <!-- Comment Edit and Delete buttons -->
                         {% if user.is_authenticated and comment.author == user %}
                         <button class="btn btn-sm btn-edit w-25" comment_id="{{ comment.id }}">Edit</button>
-                        <button class="btn btn-sm btn-delete w-25" comment_id="{{ comment.id }}">Delete</button>
+                        <button class="btn btn-sm btn-delete  w-25" data-bs-target="#deleteModal" data-bs-toggle="modal"
+                            comment_id="{{ comment.id }}">Delete</button>
                         {% endif %}
                     </div>
                 </div>
@@ -136,7 +142,8 @@
             </div>
             <div class="modal-body">
                 Are you sure you want to delete your comment?
-                This action cannot be undone.
+                <br>
+                <strong>This action cannot be undone.</strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
