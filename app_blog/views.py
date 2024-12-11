@@ -17,6 +17,7 @@ from django.contrib import messages
 
 from django.db.models import Q
 
+
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
@@ -158,7 +159,8 @@ def comment_edit(request, slug, comment_id):
             comment.save()
             messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.add_message(request, messages.ERROR, "Error updating comment!")
+            messages.add_message(request, messages.ERROR,
+                                 "Error updating comment!")
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
 
@@ -170,7 +172,8 @@ def comment_delete(request, slug, comment_id):
     """
     view to delete comment
     """
-    queryset = Post.objects.filter(status=1)
+    queryset = Review.objects.all()
+    print('Review objects: ', queryset)
     post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
@@ -181,5 +184,6 @@ def comment_delete(request, slug, comment_id):
         messages.add_message(
             request, messages.ERROR, "You can only delete your own comments!"
         )
+
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
