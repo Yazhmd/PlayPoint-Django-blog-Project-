@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect , reverse
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from django.views.generic import (
     DetailView, DeleteView, UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from django.contrib import messages
 
 from django.db.models import Q
 
@@ -70,7 +72,9 @@ def review_detail(request, id):
 
     #  comment submission
     if request.method == "POST" and request.user.is_authenticated:
+        print("Received a POST request")
         comment_form = CommentForm(request.POST)
+
         if comment_form.is_valid():
 
             # Assign the logged-in user to the comment
@@ -78,13 +82,21 @@ def review_detail(request, id):
             comment.author = request.user
             comment.review = review
             comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
             return redirect('review_detail', id=review.id)
     else:
-        comment_form = CommentForm()
+        comment_form = CommentForm(data=request.POST)
+        print("About to render template")
+
+        comment_count = review.comments.filter(approved=True).count()
 
     return render(request, 'app_blog/review_detail.html', {
         'review': review,
         'comment_form': comment_form,
+        "comment_count": comment_count,
     })
 
 
@@ -111,3 +123,50 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         """Ensure only the owner can edit their review."""
         return self.request.user == self.get_object().user
+
+
+# Comment edit
+
+def comment_edit(request, slug, comment_id):
+    """
+    view to edit comments
+    """
+    if request.method == "POST":
+
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.approved = False
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating comment!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+# Comment Delete
+
+
+def comment_delete(request, slug, comment_id):
+    """
+    view to delete comment
+    """
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR,
+                             'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))

@@ -4,13 +4,28 @@
 <html lang="en">
 
 <head>
+
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="A blog/review website for video games where users can sign up and 
+        view, write/create and comment reviews and give a rating out of 10">
+
+
+    <meta name="keywords"
+        content="review, video games, games, game score, verdict, blog, comment, gaming, retro, game reviews">
+
+
     <title>PlayPoint {% block title %} {% endblock %} </title>
 
     <!-- Link to Favicon -->
     <link rel="icon" href="{% static 'icons/favicon/favicon-96x96.webp'%}">
-
+    <link rel="icon" href="{% static 'icons/favicon/favicon-16x16.webp'%}">
+    <link rel="icon" href="{% static 'icons/favicon/favicon-32x32.webp'%}">
+    <link rel="icon" href="{% static 'icons/favicon/favicon-48x48.webp'%}">
+    <link rel="icon" href="{% static 'icons/favicon/favicon-64x64.webp'%}">
+    <link rel="icon" href="{% static 'icons/favicon/favicon-150x150.webp'%}">
 
     <!-- Bootstrap CSS -->
     {% block extra_css %}
@@ -26,6 +41,26 @@
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
+
+    <nav>
+
+        <!-- displaying Django messages -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible
+          fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
 
     <!-- Header/Navbar -->
     {% include 'includes/header.html' %}
@@ -49,6 +84,14 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/b29eabad9a.js" crossorigin="anonymous"></script>
+
+
+
+    <!-- Comments JS -->
+
+    {% block extras %}
+    
+    {% endblock %}
 
     <!-- Bootstrap JavaScript -->
     {% block onload_js %}

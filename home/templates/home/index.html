@@ -61,7 +61,7 @@
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">About PlayPoint </h1>
 
             <p class="lead">PlayPoint is the ultimate hub for gaming enthusiasts, offering insightful reviews, engaging
-                discussions, and a passionate community focused on video games. With a dedication to providing honest
+                discussions, and a passionate community focused on video games with a dedication to providing honest
                 and detailed reviews from users themselves. So what are you waiting for? </p>
 
 
@@ -141,7 +141,7 @@
 
                                 {% if request.user.is_authenticated %}
 
-                                <a href="{% url 'login' %}">login </a> to your account.
+
 
                                 <br>
                                 <br>
@@ -150,10 +150,18 @@
                                 <a href="{% url 'account_signup' %}"> sign up</a> , create and set up an
                                 account/profile (Please read the terms and conditions and privacy policy).
                                 <br>
+                                OR
+                                <br>
+
+
+                                <a href="{% url 'login' %}">login </a> to your account if you have already made one
                                 {% endif %}
                                 <br>
-                                2.) Create a review by clicking on the (+ New Review button)
-                                <button class="btn btn-sm btn-success   " type="button">+ New Review</button>
+                                <br>
+                                2.) Create a review by clicking on the
+                                <button class="btn btn-sm btn-success " type="button">+ New Review</button>
+                                button
+
                                 and fill in all the required fields (Game title, image, genre etc.) and view your review
                                 once published.
                                 You can also edit and delete any reviews if you so wish. by clicking on the
@@ -166,8 +174,9 @@
                                 <br>
                                 <br>
 
-                                3.) Make sure to also view and also comment on other users reviews as well as your own
-                                and start conversations amongst users.
+                                3.) Make sure to view and also comment on other user reviews as well as your own
+                                and start conversations amongst other users. (Comments will have to be approved by admin
+                                first)
                                 <br>
                                 If required you can also
                                 <button class="btn btn-sm btn-primary w-23">Edit </button>
