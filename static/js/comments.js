@@ -18,14 +18,15 @@ for (let button of editButtons) {
         let commentId = e.target.getAttribute("comment_id");
         let commentContent = document.getElementById(`comment${commentId}`).innerText;
         commentText.value = commentContent;
-        submitButton.innerText = "Update";
-        commentForm.setAttribute("action", `edit_comment/${commentId}`);
+        submitButton.innerText = "Update Comment Edit";
+
+
+        cancelButton.classList.remove("d-none");
+
+        // commentForm.setAttribute("action", `/edit_comment/${commentId}`);
+        commentForm.setAttribute("action", `/app_blog/review_detail/${reviewSlug}/edit_comment/${commentId}/`);
     });
 }
-
-
-
-// const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
 
 const deleteButtons = document.getElementsByClassName("btn-delete");
 
@@ -51,8 +52,7 @@ const reviewSlug = document.querySelector("#review-slug").dataset.slug;
 for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id");
-        deleteConfirm.href = `/reviews/${reviewSlug}/delete_comment/${commentId}`;
-        // deleteModal.show();
+        deleteConfirm.href = `/review_detail/${reviewSlug}/delete_comment/${commentId}`;
     });
 }
 

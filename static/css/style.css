@@ -50,20 +50,6 @@ body {
 }
 
 
-.active {
-    border-bottom: 2px solid #10B981;
-
-
-    font-weight: 500;
-}
-
-.active:after {
-
-    color: white;
-}
-
-
-
 
 /* Header-----------------------------------------------------------------------------------> */
 .navbar {
@@ -148,14 +134,6 @@ a.navbar-brand img.logo:hover {
 }
 
 
-.profile-link {
-
-    max-width: 2rem;
-
-
-}
-
-
 
 /* Main ----------------------------------------------------------------------------------->*/
 
@@ -216,10 +194,6 @@ footer::before {
     width: 3rem;
 
 }
-
-
-
-
 
 .social-icons-container a {
     color: #343a40;

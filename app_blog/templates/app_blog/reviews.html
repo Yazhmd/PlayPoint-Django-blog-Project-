@@ -5,6 +5,7 @@
 
 {% block content %}
 
+
 <h1 class="text-center p-2 d-block">
     <u>Review Library</u>
 </h1>
@@ -15,17 +16,13 @@
 <div class="container d-flex flex-row flex-wrap justify-content-center">
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
-        <div class="card m-3 game-card-body">
+        <div class="card  m-3 game-card-body">
             <div class="image-flash">
                 <p class="author">Author: {{ review.user.username }}</p> <!-- Access username directly -->
             </div>
-            {% if review.images %}
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
-            {% else %}
-            <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Default image"
-                class="card-img-top">
-            <p>Default image</p>
-            {% endif %}
+
+
             <div class="review-img-card">
                 <div class="card-body">
                     <p class="card-title game-title">{{ review.title }}</p>
@@ -39,10 +36,10 @@
 </div>
 
 <!-- Pagination Links for Reviews -->
-<div class="pagination text-center mt-4">
+<div class="pagination">
     {% if reviews.has_previous %}
-    <a href="?page=1" class="btn btn-secondary">&laquo; First</a>
-    <a href="?page={{ reviews.previous_page_number }}" class="btn btn-secondary">Previous</a>
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ reviews.previous_page_number }}">previous</a>
     {% endif %}
 
     <span class="current">
@@ -50,9 +47,23 @@
     </span>
 
     {% if reviews.has_next %}
-    <a href="?page={{ reviews.next_page_number }}" class="btn btn-secondary">Next</a>
-    <a href="?page={{ reviews.paginator.num_pages }}" class="btn btn-secondary">Last &raquo;</a>
+    <a href="?page={{ reviews.next_page_number }}">next</a>
+    <a href="?page={{ reviews.paginator.num_pages }}">last &raquo;</a>
     {% endif %}
 </div>
 
+
+
+<!-- Pagination Links for Blog Posts -->
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+<!-- index.html content ends here -->
 {% endblock %}

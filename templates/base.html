@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <link rel="stylesheet" href="{% static 'css/app_blog.css'%}">
     <link rel="stylesheet" href="{% static 'css/home.css'%}">
-
+    <link rel="stylesheet" href="{% static 'css/homeanimation.css'%}">
     <link rel="stylesheet" href="{% static 'css/mediaqueries.css'%}">
 </head>
 
@@ -45,11 +45,12 @@
     <nav>
 
         <!-- displaying Django messages -->
-        <div class="container django-messages">
+        <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                    <div class="alert {{ message.tags }} alert-dismissible
+          fade show" id="msg" role="alert">
                         {{ message | safe }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -59,7 +60,6 @@
         </div>
 
     </nav>
-
 
 
     <!-- Header/Navbar -->

@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
+
 from cloudinary.models import CloudinaryField
+
+
 from django_resized import ResizedImageField
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
@@ -23,7 +26,11 @@ GAME_CONSOLE = [
 
 
 def get_default_user():
+    # Return None when no user is authenticated
     return None
+
+
+# Review Model---------------------------------------------------------------->
 
 
 class Review(models.Model):
@@ -37,7 +44,9 @@ class Review(models.Model):
         quality=75,
         upload_to="app_blog/",
         force_format="WEBP",
-        default="Playpoint_logo_icon-removebg-preview_xy8ytf",
+        blank=True,
+        null=True,
+        default="",
     )
     image_alt = models.CharField(max_length=100)
     game_platform = models.CharField(max_length=50, choices=GAME_PLATFORM, default="PC")
@@ -45,6 +54,7 @@ class Review(models.Model):
     game_score = models.IntegerField(
         choices=[(i, str(i)) for i in range(11)], default=0
     )
+
     posted_date = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -60,8 +70,6 @@ class Review(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        if Review.objects.filter(slug=self.slug).exists():
-            self.slug = f"{self.slug}-{Review.objects.count() + 1}"
         super().save(*args, **kwargs)
 
     def clean(self):
@@ -73,7 +81,9 @@ class Review(models.Model):
         return self.title
 
 
+# Comment Model---------------------------------------------------------------->
 class Comment(models.Model):
+
     review = models.ForeignKey(
         Review, on_delete=models.CASCADE, related_name="comments"
     )

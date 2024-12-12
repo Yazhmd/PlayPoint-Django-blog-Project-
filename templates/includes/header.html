@@ -47,12 +47,12 @@
           </li>
 
           {% if request.user.is_authenticated %}
+          <li class="nav-item me-3">
+            <a class=" btn btn-sm btn-warning rounded-pill {% if url_name == 'account_logout' %}active{% endif %} "
+              href="{% url 'account_logout' %}">Logout</a>
+          </li>
 
-          <a class=" nav-link {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">
-
-            <button class="btn btn-warning"> Logout </button>
-
-          </a>
+        
 
 
           <div class="profile-img text-center">
@@ -94,8 +94,7 @@
         <a href="{% url 'add_review' %}">
           <button class="btn btn-success add-review-button me-2">+ New Review</button>
         </a>
-
-
+ 
         {% else %}
         <a href=" {% url 'reviews' %}">
           <button class="btn btn-success add-review-button">Write a Review</button>

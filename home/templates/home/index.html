@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
 {% block title %}Index{% endblock %}
 {% block content %}
 
@@ -104,7 +102,7 @@
                 <h1>FAQs</h1>
 
 
-                <div class="accordion-item">
+                <div class="accordion-item" id="faqs-box">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -136,7 +134,7 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>1.) You are already a registered user and are logged in
+                            <strong>1.) You are already a registered user and are logged in 
 
 
 
@@ -144,13 +142,12 @@
 
 
 
-
-
+                         
+                     
                                 {% else %}
 
                                 <a href="{% url 'account_signup' %}"> sign up</a> , create and set up an
-                                account/profile after registration (sign up) (Please read the terms and conditions and
-                                privacy policy).
+                                account/profile (Please read the terms and conditions and privacy policy).
                                 <br>
                                 OR
                                 <br>
@@ -176,7 +173,18 @@
                                 <br>
                                 <br>
 
-                              
+                                3.) Make sure to view and also comment on other user reviews as well as your own
+                                and start conversations amongst other users. (Comments will have to be approved by admin
+                                first)
+                                <br>
+                                If required you can also
+                                <button class="btn btn-sm btn-edit w-23">Edit</button>
+
+                                and
+
+                                <button class="btn btn-sm btn-delete w-23">Delete</button>
+                                any comments that you have made.
+
 
                             </strong>
                         </div>
@@ -186,7 +194,7 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <strong>Terms and Conditions</strong>
+                            <strong>Terms and Coditions</strong>
                               (Privacy Policy)
                         </button>
                     </h2>
@@ -247,26 +255,18 @@
 <hr>
 
 <!-- Review Cards List -->
-
 <div class="container d-flex flex-row flex-wrap justify-content-center">
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
         <div class="card m-3 game-card-body">
-            {% if review.images %}
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
-            {% else %}
-            <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Default image"
-                class="card-img-top">
-            <p>Default image</p>
-            {% endif %}
         </div>
     </a>
+
     {% empty %}
     <p>No reviews available.</p>
     {% endfor %}
 </div>
-
-
 
 <br>
 
