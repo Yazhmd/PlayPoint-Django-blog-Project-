@@ -7,40 +7,29 @@ from django.views.generic import (
     TemplateView,
     CreateView,
     ListView,
-    DetailView,
     DeleteView,
     UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.contrib import messages
-
 from django.db.models import Q
 
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
-# HomePage view
-
 
 class HomePage(TemplateView):
-    """Displays the home page."""
-
     template_name = "base.html"
 
 
-# AddReview view (CreateView)
 class AddReview(LoginRequiredMixin, CreateView):
-    """View to add a new review."""
-
     template_name = "app_blog/add_review.html"
     model = Review
     form_class = ReviewForm
     success_url = reverse_lazy("reviews")
 
     def form_valid(self, form):
-        """Automatically assign the logged-in user to the review."""
-
         form.instance.user = self.request.user
         messages.success(self.request, "Review Successfully Created!")
         return super().form_valid(form)
@@ -52,34 +41,27 @@ class AddReview(LoginRequiredMixin, CreateView):
         return super().form_invalid(form)
 
 
-# Reviews List view (ListView)
 class Reviews(ListView):
-    """View all approved reviews."""
-
     model = Review
     template_name = "app_blog/reviews.html"
     context_object_name = "reviews"
     paginate_by = 6
 
     def get_queryset(self):
-        """Fetch only reviews with status approved."""
         query = self.request.GET.get("q")
         if query:
-            review = self.model.objects.filter(
-                Q(title__icontains=query)
-                | Q(review__icontains=query)
-                | Q(genre__icontains=query)
-                | Q(game_platform__icontains=query)
-                | Q(game_console__icontains=query)
-            )
+            return self.model.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(genre__icontains=query) |
+                Q(game_platform__icontains=query) |
+                Q(game_console__icontains=query)
+            ).filter(status=0)
         else:
-            review = self.model.objects.filter(status=0)
-        return review
+            return self.model.objects.filter(status=0)
 
 
-# Review Detail view
 def review_detail(request, id):
-    """Display details of a single review."""
     review = get_object_or_404(Review, id=id)
 
     if request.method == "POST" and request.user.is_authenticated:
@@ -90,7 +72,8 @@ def review_detail(request, id):
             comment.author = request.user
             comment.review = review
             comment.save()
-            messages.success(request, "Comment submitted and awaiting approval.")
+            messages.success(
+                request, "Comment submitted and awaiting approval.")
             return redirect("review_detail", id=review.id)
         else:
             messages.error(
@@ -112,16 +95,12 @@ def review_detail(request, id):
     )
 
 
-# DeleteReview view (DeleteView)
 class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    """View to delete a review."""
-
     model = Review
     template_name = "app_blog/review_confirm_delete.html"
     success_url = reverse_lazy("reviews")
 
     def test_func(self):
-        """Ensure only the owner can delete their review."""
         return self.request.user == self.get_object().user
 
     def delete(self, request, *args, **kwargs):
@@ -129,17 +108,13 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
-# EditReview view (UpdateView)
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    """View to edit a review."""
-
     model = Review
     template_name = "app_blog/edit_review.html"
     form_class = ReviewForm
     success_url = reverse_lazy("reviews")
 
     def test_func(self):
-        """Ensure only the owner can edit their review."""
         return self.request.user == self.get_object().user
 
     def form_valid(self, form):
@@ -153,11 +128,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_invalid(form)
 
 
-# Comment edit
 def comment_edit(request, slug, comment_id):
-    """
-    View to edit comments
-    """
     queryset = Review.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
@@ -166,10 +137,7 @@ def comment_edit(request, slug, comment_id):
         comment_form = CommentForm(data=request.POST, instance=comment)
 
         if comment_form.is_valid() and comment.author == request.user:
-            comment = comment_form.save(commit=False)
-            comment.post = post
-            comment.approved = False
-            comment.save()
+            comment_form.save()
             messages.success(request, "Comment Updated!")
             return HttpResponseRedirect(reverse("review_detail", args=[slug]))
         else:
@@ -189,11 +157,7 @@ def comment_edit(request, slug, comment_id):
     )
 
 
-# Comment Delete
 def comment_delete(request, slug, comment_id):
-    """
-    View to delete comment
-    """
     post = get_object_or_404(Review, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 

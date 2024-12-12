@@ -60,7 +60,7 @@
             <a href="{% url 'review_detail' review.id %}">
                 <h3>{{ review.title }}</h3>
             </a>
-            <p>{{ review.posted_date|date:'d M Y' }}</p> <!-- Formatting the date -->
+            <p>{{ review.posted_date|date:'d M Y' }}</p>  
             <hr>
             {% endfor %}
             {% else %}

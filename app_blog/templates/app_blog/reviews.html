@@ -12,14 +12,12 @@
 <hr>
 
 <!-- Review Cards List -->
-
-
 <div class="container d-flex flex-row flex-wrap justify-content-center">
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
         <div class="card m-3 game-card-body">
             <div class="image-flash">
-                <p class="author">Author: {{ review.user }}</p>
+                <p class="author">Author: {{ review.user.username }}</p> <!-- Access username directly -->
             </div>
             {% if review.images %}
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="card-img-top">
@@ -31,7 +29,6 @@
             <div class="review-img-card">
                 <div class="card-body">
                     <p class="card-title game-title">{{ review.title }}</p>
-
                 </div>
             </div>
         </div>
