@@ -28,8 +28,7 @@ for (let button of editButtons) {
 
         cancelButton.classList.remove("d-none");
 
-        // commentForm.setAttribute("action", `/edit_comment/${commentId}`);
-        commentForm.setAttribute("action", `/app_blog/review_detail/${reviewSlug}/edit_comment/${commentId}/`);
+        commentForm.setAttribute("action", `/reviews/edit_comment/${commentId}`);
     });
 }
 
@@ -68,7 +67,7 @@ const reviewSlug = document.querySelector("#review-slug").dataset.slug;
 for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id");
-        deleteConfirm.href = `/review_detail/${reviewSlug}/delete_comment/${commentId}`;
+        deleteConfirm.href = `/app_blog/${reviewSlug}/delete_comment/${commentId}`;
     });
 <<<<<<< HEAD
 }

@@ -19,6 +19,8 @@ from django.db.models import Q
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
+# HomePage view
+
 
 class HomePage(TemplateView):
     template_name = "base.html"
@@ -31,10 +33,19 @@ class AddReview(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("reviews")
 
     def form_valid(self, form):
+        """Automatically assign the logged-in user to the review."""
+
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "Failed to create review. Please check the form for errors."
+        )
+        return super().form_invalid(form)
 
+
+# Reviews List view (ListView)
 class Reviews(ListView):
     model = Review
     template_name = "app_blog/reviews.html"
@@ -137,12 +148,8 @@ def comment_edit(request, slug, comment_id):
             comment.save()
             messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.error(
-                request, "Error updating comment! Ensure you own the comment."
-            )
-
-    else:
-        comment_form = CommentForm(instance=comment)
+            messages.add_message(request, messages.ERROR,
+                                 "Error updating comment!")
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
 
@@ -151,6 +158,9 @@ def comment_edit(request, slug, comment_id):
 
 
 def comment_delete(request, slug, comment_id):
+    """
+    View to delete comment
+    """
     post = get_object_or_404(Review, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
@@ -158,6 +168,9 @@ def comment_delete(request, slug, comment_id):
         comment.delete()
         messages.add_message(request, messages.SUCCESS, "Comment deleted!")
     else:
-        messages.error(request, "You can only delete your own comments!")
+        messages.add_message(
+            request, messages.ERROR, "You can only delete your own comments!"
+        )
+
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))

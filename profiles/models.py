@@ -30,8 +30,7 @@ class Profile(models.Model):
 
     profile_pic = CloudinaryField(
         "image",
-
-        default="blank-avatar-photo-place-holder_yvkwdr",
+        default="placeholder",
         transformation={
             "width": 300,
             "height": 300,
@@ -52,6 +51,6 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(instance, created, **kwargs):
-    """Creates and updates the user profile"""
+    """Creates and update the user profile"""
     if created:
         Profile.objects.create(user=instance)
