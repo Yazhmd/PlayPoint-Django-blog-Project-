@@ -45,7 +45,6 @@
 
             <p><strong>Review: </strong>{{ review.review | safe }}</p>
             <input type="hidden" value="{{ review.slug }}" id="review-slug" data-slug="{{ review.slug }}">
-
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
             <div class="text-center mt-3">
@@ -56,5 +55,118 @@
         </div>
     </div>
 
-  
-    {% endblock %}
+    <!-- Displaying count of comments -->
+    <div class="row">
+        <div class="col-12">
+            <strong class="text-secondary">
+                <i class="far fa-comments"></i> {{ comment_count }}
+            </strong>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+    </div>
+
+    <!-- Displaying Comments -->
+    <div class="row">
+
+        <div>
+            <h3>Comments:</h3>
+
+            {% if user.is_authenticated %}
+            <a class="btn btn-md btn-warning" href="#comment-area">Write a Comment</a>
+            {% endif %}
+        </div>
+        <br>
+        {% if review.comments.all %}
+        {% for comment in review.comments.all %}
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="p-2 comments
+                        {% if not comment.approved and comment.author == user %}
+                            faded
+                        {% elif not comment.approved %}
+                            d-none
+                        {% endif %}">
+
+                        <p class="font-weight-bold">
+                            {{ comment.author }}
+                            <span class="font-weight-normal">
+                                {{ comment.created_on|date:"F j, Y, g:i a" }}
+                            </span> wrote:
+                        </p>
+                        <div id="comment{{ comment.id }}">
+                            {{ comment.body|linebreaks }}
+                        </div>
+                        {% if not comment.approved and comment.author == user %}
+                        <p class="approval">
+                            This comment is awaiting approval
+                        </p>
+                        {% endif %}
+
+                        <!-- Comment Edit and Delete buttons -->
+                        {% if user.is_authenticated and comment.author == user %}
+                        <a href="#comment-area">
+                            <button class="btn btn-sm btn-edit w-25" comment_id="{{ comment.id }}">Edit</button>
+                        </a>
+
+                        <button class="btn btn-sm btn-delete w-25" data-bs-target="#deleteModal" data-bs-toggle="modal"
+                            data-comment-id="{{ comment.id }}" data-slug="{{ review.slug }}">Delete
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No comments yet. Be the first to comment!</p>
+        {% endif %}
+    </div>
+
+    <!-- Add Comment Form -->
+    {% if user.is_authenticated %}
+    <form id="commentForm" method="post">
+        {% csrf_token %}
+
+        <div class="form-group" id="comment-area">
+            <textarea id="id_body" name="body" rows="4" class="form-control"
+                placeholder="Add a comment or even your own game score /10..." required></textarea>
+        </div>
+        <button id="submitButton" type="submit" class="btn btn-primary mt-2">Submit</button>
+
+        <button type="button" id="cancelButton" class="btn btn-secondary mt-3 d-none">Cancel</button>
+
+    </form>
+    {% else %}
+    <p class="text-muted">You need to <a href="{% url 'login' %}" class="btn btn-warning">log in</a> to comment.</p>
+    {% endif %}
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your comment?
+                <br>
+                <strong>This action cannot be undone.</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}

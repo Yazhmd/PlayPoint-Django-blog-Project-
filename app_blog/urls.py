@@ -32,6 +32,8 @@ urlpatterns = [
         views.comment_edit,
         name="comment_edit",
     ),
+
+
     # Comment delete
     path(
         "<slug:slug>/delete_comment/<int:comment_id>",

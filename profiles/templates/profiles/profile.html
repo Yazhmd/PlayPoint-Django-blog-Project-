@@ -8,8 +8,8 @@
     <div class="profile">
         <div class="info">
             <div class="profile-img text-center">
-                {% if profile.profile_pic.url %}
-                <img src="{{ profile.profile_pic.url }}" alt="{{ profile.user.username }}'s profile image"
+                {% if profile.image.url %}
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image"
                     class="img-fluid rounded-circle" style="max-width: 150px;">
                 {% else %}
                 <img src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
@@ -20,11 +20,14 @@
             <h1>Account:</h1>
 
             <h2><strong>{{ profile.user.username }}</strong></h2>
-            <p><strong>First Name: </strong>{{ profile.first_name }}</p>
-            <p><strong>Last Name: </strong>{{ profile.last_name }}</p>
+
+            <p><strong>First Name: </strong>{{ profile.user.first_name }}</p>
+
+            <p><strong>Last Name: </strong>{{ profile.user.last_name }}</p>
+
             <p><strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}</p>
-            <p><strong>Reviews Published: </strong>{{ profile.user.reviews.count }}</p>
-            <!-- Updated to use 'reviews' -->
+
+            <p><strong>Reviews Published: </strong>{{ profile.user.review_owner.count }}</p>
 
             {% if profile.bio %}
             <strong>About Me (Bio): </strong>
@@ -38,29 +41,25 @@
 
                 <br>
 
-                <a href="{% url 'account_logout' %}">
-                    <button class="btn btn-warning w-25 mb-4">Logout</button>
+                <a class=" " href="{% url 'account_logout' %}">
+
+                    <button class="btn btn-warning  w-25 mb-4"> Logout </button>
+
                 </a>
+
+
             </div>
             {% endif %}
         </div>
 
         <div class="profile-reviews">
-            <h2 class="text-center pb-4">Personal Reviews</h2>
-            <a href="{% url 'add_review' %}">
-                <button class="btn btn-success add-review-button me-2">+ New Review</button>
-            </a>
-
-            <hr>
-
-            {% if profile.user.reviews.exists %}
-            <!-- Updated to use 'reviews' -->
-            {% for review in profile.user.reviews.all %}
-            <!-- Updated to use 'reviews' -->
+            <h2 class="text-center pb-4">Latest Reviews</h2>
+            {% if profile.user.review_owner.exists %}
+            {% for review in profile.user.review_owner.all %}
             <a href="{% url 'review_detail' review.id %}">
                 <h3>{{ review.title }}</h3>
             </a>
-            <p>{{ review.posted_date|date:'d M Y' }}</p>  
+            <p>{{ review.posted_date }}</p>
             <hr>
             {% endfor %}
             {% else %}

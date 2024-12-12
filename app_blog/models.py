@@ -34,7 +34,13 @@ def get_default_user():
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(
+        User,
+        related_name="review_owner",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     genre = models.CharField(max_length=250)
@@ -49,8 +55,10 @@ class Review(models.Model):
         default="",
     )
     image_alt = models.CharField(max_length=100)
-    game_platform = models.CharField(max_length=50, choices=GAME_PLATFORM, default="PC")
-    game_console = models.CharField(max_length=100, null=False, blank=False, default="")
+    game_platform = models.CharField(
+        max_length=50, choices=GAME_PLATFORM, default="PC")
+    game_console = models.CharField(
+        max_length=100, null=False, blank=False, default="")
     game_score = models.IntegerField(
         choices=[(i, str(i)) for i in range(11)], default=0
     )
