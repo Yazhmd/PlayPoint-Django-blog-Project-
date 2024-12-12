@@ -141,12 +141,8 @@ def comment_edit(request, slug, comment_id):
             messages.success(request, "Comment Updated!")
             return HttpResponseRedirect(reverse("review_detail", args=[slug]))
         else:
-            messages.error(
-                request, "Error updating comment! Ensure you own the comment."
-            )
-
-    else:
-        comment_form = CommentForm(instance=comment)
+            messages.add_message(request, messages.ERROR,
+                                 "Error updating comment!")
 
     return render(
         request,
@@ -158,13 +154,21 @@ def comment_edit(request, slug, comment_id):
 
 
 def comment_delete(request, slug, comment_id):
-    post = get_object_or_404(Review, slug=slug)
+    """
+    view to delete comment
+    """
+    queryset = Review.objects.all()
+    print('Review objects: ', queryset)
+    post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:
         comment.delete()
         messages.success(request, "Comment deleted!")
     else:
-        messages.error(request, "You can only delete your own comments!")
+        messages.add_message(
+            request, messages.ERROR, "You can only delete your own comments!"
+        )
+
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
