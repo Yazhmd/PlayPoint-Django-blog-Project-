@@ -8,9 +8,8 @@
 
 <a href="{% url 'reviews' %}" class="btn btn-success w-23"> Back to Reviews </a>
 
-
-<div class="container py-4   ">
-    <div class="d-flex align-items-center justify-content-between bg-light rounded shadow-sm p-4  review-box">
+<div class="container py-4">
+    <div class="d-flex align-items-center justify-content-between bg-light rounded shadow-sm p-4 review-box">
         <!-- Game Image on the Left -->
         <div class="review-img me-4" style="flex-shrink: 0;">
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="img-fluid" style="max-width: 250px;">
@@ -45,7 +44,8 @@
             </div>
 
             <p><strong>Review: </strong>{{ review.review | safe }}</p>
-            <input type="hidden" value="{{ review.slug }}" id="review-slug">
+            <input type="hidden" value="{{ review.slug }}" id="review-slug" data-slug="{{ review.slug }}">
+
             <!-- Edit and Delete Options for Author -->
             {% if request.user == review.user %}
             <div class="text-center mt-3">
@@ -56,8 +56,5 @@
         </div>
     </div>
 
-
-   
-
- 
-{% endblock %}
+  
+    {% endblock %}
