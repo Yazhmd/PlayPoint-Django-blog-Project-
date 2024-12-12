@@ -13,27 +13,33 @@ from .views import (
 
 urlpatterns = [
     path("", views.HomePage.as_view(), name="home"),  # Home page view
-    path("review/", AddReview.as_view(), name="add_review"),  # Add review page
 
+    # Add review page
+    path("review/", AddReview.as_view(), name="add_review"),
     path("reviews/", views.Reviews.as_view(), name="reviews"),
-    path(
-        "review_detail/<int:id>/", views.review_detail, name="review_detail"
-    ),  # Review detail page
-    path(
-        "delete/<int:pk>/", views.DeleteReview.as_view(), name="delete_review"
-    ),  # Delete review
-    path(
-        "edit/<int:pk>/", views.EditReview.as_view(), name="edit_review"
-    ),  # Edit review
+
+    # Review detail page
+    path("review_detail/<int:id>/", views.review_detail, name="review_detail"),
 
 
+    # Delete review
+    path("delete/<int:pk>/", views.DeleteReview.as_view(), name="delete_review"),
+
+    # Edit review
+    path("edit/<int:pk>/", views.EditReview.as_view(), name="edit_review"),
+
+
+    # Comment edit
     path(
-        "<slug:slug>/edit_comment/<int:comment_id>",
+        "review_detail/<slug:slug>/edit_comment/<int:comment_id>/",
         views.comment_edit,
         name="comment_edit",
     ),
+
+
+    # Comment delete
     path(
-        "<slug:slug>/delete_comment/<int:comment_id>",
+        "review_detail/<slug:slug>/delete_comment/<int:comment_id>/",
         views.comment_delete,
         name="comment_delete",
     ),

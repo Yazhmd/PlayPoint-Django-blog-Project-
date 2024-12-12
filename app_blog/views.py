@@ -17,12 +17,12 @@ from django.contrib import messages
 
 from django.db.models import Q
 
-
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
-
 # HomePage view
+
+
 class HomePage(TemplateView):
     """Displays the home page."""
 
@@ -40,8 +40,16 @@ class AddReview(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """Automatically assign the logged-in user to the review."""
+
         form.instance.user = self.request.user
+        messages.success(self.request, "Review Successfully Created!")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "Failed to create review. Please check the form for errors."
+        )
+        return super().form_invalid(form)
 
 
 # Reviews List view (ListView)
@@ -55,9 +63,6 @@ class Reviews(ListView):
 
     def get_queryset(self):
         """Fetch only reviews with status approved."""
-        return Review.objects.filter(status=1)
-
-    def get_queryset(self, **kwargs):
         query = self.request.GET.get("q")
         if query:
             review = self.model.objects.filter(
@@ -67,9 +72,8 @@ class Reviews(ListView):
                 | Q(game_platform__icontains=query)
                 | Q(game_console__icontains=query)
             )
-
         else:
-            review = self.model.objects.all()
+            review = self.model.objects.filter(status=1)
         return review
 
 
@@ -78,27 +82,24 @@ def review_detail(request, id):
     """Display details of a single review."""
     review = get_object_or_404(Review, id=id)
 
-    #  comment submission
     if request.method == "POST" and request.user.is_authenticated:
-        print("Received a POST request")
         comment_form = CommentForm(request.POST)
 
         if comment_form.is_valid():
-
-            # Assign the logged-in user to the comment
             comment = comment_form.save(commit=False)
             comment.author = request.user
             comment.review = review
             comment.save()
-            messages.add_message(
-                request, messages.SUCCESS, "Comment submitted and awaiting approval"
-            )
+            messages.success(request, "Comment submitted and awaiting approval.")
             return redirect("review_detail", id=review.id)
+        else:
+            messages.error(
+                request, "Failed to submit comment. Please check the form for errors."
+            )
     else:
-        comment_form = CommentForm(data=request.POST)
-        print("About to render template")
+        comment_form = CommentForm()
 
-        comment_count = review.comments.filter(approved=True).count()
+    comment_count = review.comments.filter(approved=True).count()
 
     return render(
         request,
@@ -123,6 +124,10 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         """Ensure only the owner can delete their review."""
         return self.request.user == self.get_object().user
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Review Deleted.")
+        return super().delete(request, *args, **kwargs)
+
 
 # EditReview view (UpdateView)
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -137,19 +142,27 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         """Ensure only the owner can edit their review."""
         return self.request.user == self.get_object().user
 
+    def form_valid(self, form):
+        messages.success(self.request, "Review Successfully Updated!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request, "Failed to update review. Please check the form for errors."
+        )
+        return super().form_invalid(form)
+
 
 # Comment edit
-
-
 def comment_edit(request, slug, comment_id):
     """
-    view to edit comments
+    View to edit comments
     """
-    if request.method == "POST":
+    queryset = Review.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
 
-        queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
-        comment = get_object_or_404(Comment, pk=comment_id)
+    if request.method == "POST":
         comment_form = CommentForm(data=request.POST, instance=comment)
 
         if comment_form.is_valid() and comment.author == request.user:
@@ -157,33 +170,37 @@ def comment_edit(request, slug, comment_id):
             comment.post = post
             comment.approved = False
             comment.save()
-            messages.add_message(request, messages.SUCCESS, "Comment Updated!")
+            messages.success(request, "Comment Updated!")
+            return HttpResponseRedirect(reverse("review_detail", args=[slug]))
         else:
-            messages.add_message(request, messages.ERROR,
-                                 "Error updating comment!")
+            messages.error(
+                request, "Error updating comment! Ensure you own the comment."
+            )
 
-    return HttpResponseRedirect(reverse("review_detail", args=[slug]))
+    else:
+        comment_form = CommentForm(instance=comment)
+
+    return render(
+        request,
+        "app_blog/edit_comment.html",
+        {
+            "comment_form": comment_form,
+        },
+    )
 
 
 # Comment Delete
-
-
 def comment_delete(request, slug, comment_id):
     """
-    view to delete comment
+    View to delete comment
     """
-    queryset = Review.objects.all()
-    print('Review objects: ', queryset)
-    post = get_object_or_404(queryset, slug=slug)
+    post = get_object_or_404(Review, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:
         comment.delete()
-        messages.add_message(request, messages.SUCCESS, "Comment deleted!")
+        messages.success(request, "Comment deleted!")
     else:
-        messages.add_message(
-            request, messages.ERROR, "You can only delete your own comments!"
-        )
-
+        messages.error(request, "You can only delete your own comments!")
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))

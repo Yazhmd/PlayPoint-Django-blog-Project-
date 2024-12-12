@@ -1,15 +1,8 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
-from django.conf import settings
-
-
-# Create your models here.
 
 
 class Profile(models.Model):
@@ -17,12 +10,10 @@ class Profile(models.Model):
     User Profile Model
     """
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User,
-        related_name="profile",
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        related_name="profile",
     )
 
     first_name = models.CharField(max_length=30, blank=True, null=True)
@@ -30,7 +21,8 @@ class Profile(models.Model):
 
     profile_pic = CloudinaryField(
         "image",
-        default="placeholder",
+
+        default="blank-avatar-photo-place-holder_yvkwdr",
         transformation={
             "width": 300,
             "height": 300,
@@ -42,7 +34,6 @@ class Profile(models.Model):
     bio = models.TextField(null=True, blank=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
-
     last_login = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -51,6 +42,6 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(instance, created, **kwargs):
-    """Creates and update the user profile"""
+    """Creates and updates the user profile"""
     if created:
         Profile.objects.create(user=instance)

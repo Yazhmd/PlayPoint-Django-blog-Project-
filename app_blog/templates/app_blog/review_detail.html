@@ -12,14 +12,28 @@
     <div class="d-flex align-items-center justify-content-between bg-light rounded shadow-sm p-4 review-box">
         <!-- Game Image on the Left -->
         <div class="review-img me-4" style="flex-shrink: 0;">
+            {% if review.images %}
             <img src="{{ review.images.url }}" alt="{{ review.image_alt }}" class="img-fluid" style="max-width: 250px;">
+            {% else %}
+            <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Default image"
+                class="img-fluid" style="max-width: 250px;">
+            <p>Default image</p>
+            {% endif %}
         </div>
 
         <!-- Review Details on the Right -->
         <div class="review-details">
             <h1>{{ review.title }}</h1>
             <p class="text-muted">
-                <strong>Posted by {{ review.user }} on {{ review.posted_date|date:"F j, Y" }} </strong>
+                <strong>Posted by:
+                    {% if profile.image.url %}
+                    <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image"
+                        class="img-fluid rounded-circle" style="max-width: 2rem;">
+                    {% else %}
+                    <img src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
+                        class="img-fluid rounded-circle" style="max-width: 2rem;">
+                    {% endif %}
+                    {{ review.user }} on {{ review.posted_date|date:"F j, Y" }} </strong>
             </p>
 
             <hr>
@@ -65,8 +79,9 @@
         <div>
             <h3>Comments:</h3>
 
-            <a class="btn btn-md btn-warning" href="#comment-area">Write a Comment </a>
-
+            {% if user.is_authenticated %}
+            <a class="btn btn-md btn-warning" href="#comment-area">Write a Comment</a>
+            {% endif %}
         </div>
         <br>
         {% if review.comments.all %}
@@ -75,8 +90,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="p-2 comments
-
-                    
                         {% if not comment.approved and comment.author == user %}
                             faded
                         {% elif not comment.approved %}
@@ -100,14 +113,13 @@
 
                         <!-- Comment Edit and Delete buttons -->
                         {% if user.is_authenticated and comment.author == user %}
-
-                        <a href=" #comment-area">
+                        <a href="#comment-area">
                             <button class="btn btn-sm btn-edit w-25" comment_id="{{ comment.id }}">Edit</button>
                         </a>
 
-
                         <button class="btn btn-sm btn-delete w-25" data-bs-target="#deleteModal" data-bs-toggle="modal"
-                            comment_id="{{ comment.id }}">Delete</button>
+                            data-comment-id="{{ comment.id }}" data-slug="{{ review.slug }}">Delete
+                        </button>
                         {% endif %}
                     </div>
                 </div>
@@ -136,7 +148,6 @@
     {% else %}
     <p class="text-muted">You need to <a href="{% url 'login' %}" class="btn btn-warning">log in</a> to comment.</p>
     {% endif %}
-</div>
 </div>
 
 <!-- Delete confirmation modal -->
