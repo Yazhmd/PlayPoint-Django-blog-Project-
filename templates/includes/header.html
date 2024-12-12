@@ -54,23 +54,18 @@
 
           </a>
 
-
-
-          <!-- Account profile nav link -->
           <div class="profile-img text-center">
-            {% if profile.image.url %}
-
-            <a class=" btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
-              href="{% url 'profile' pk=request.user.id %}"> <img src="{{ profile.image.url }}"
-                alt="{{ profile.user.username }}'s profile image" class="img-fluid rounded-circle profile-link">
-              {{ profile.user.username }} </a>
-            {% else %}
-
-            <a class="btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
-              href="{% url 'profile' pk=request.user.id %}"> <img
-                src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
-                class="img-fluid rounded-circle  profile-link"> {{ profile.user.username }} </a>
-            {% endif %}
+            <a class="btn btn-secondary   {% if url_name == 'profile' %}active{% endif %}"
+              href="{% url 'profile' pk=request.user.id %}">
+              {% if profile.profile_pic %}
+              <img src="{{ profile.profile_pic.url }}" alt="{{ profile.user.username }}'s profile image"
+                class="img-fluid rounded-circle profile-link">
+              {% else %}
+              <img src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
+                class="img-fluid rounded-circle profile-link">
+              {% endif %}
+              {{ profile.user.username }}
+            </a>
           </div>
 
 

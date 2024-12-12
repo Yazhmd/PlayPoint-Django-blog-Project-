@@ -12,6 +12,8 @@
 <hr>
 
 <!-- Review Cards List -->
+
+
 <div class="container d-flex flex-row flex-wrap justify-content-center">
     {% for review in reviews %}
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{ review.title }}">
@@ -29,7 +31,7 @@
             <div class="review-img-card">
                 <div class="card-body">
                     <p class="card-title game-title">{{ review.title }}</p>
-                    <p class="card-text">{{ review.review|truncatechars:100 }}</p>
+
                 </div>
             </div>
         </div>

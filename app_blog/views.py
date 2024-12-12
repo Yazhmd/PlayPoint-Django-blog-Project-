@@ -73,7 +73,7 @@ class Reviews(ListView):
                 | Q(game_console__icontains=query)
             )
         else:
-            review = self.model.objects.filter(status=1)
+            review = self.model.objects.filter(status=0)
         return review
 
 
