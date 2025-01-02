@@ -52,6 +52,7 @@ class Review(models.Model):
         force_format="WEBP",
         default=None,
     )
+    
     image_alt = models.CharField(max_length=100)
 
     game_platform = models.CharField(
