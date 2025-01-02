@@ -1,93 +1,117 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %} {% load static %} {% block title %}Profile - {{
+profile.user.username }}{% endblock %} {% block content %}
 
-{% block title %}Profile - {{ profile.user.username }}{% endblock %}
-
-{% block content %}
 <div class="container p-4">
-    <div class="profile">
-        <div class="info">
-            <div class="profile-img text-center">
-                {% if profile.profile_pic.url %}
-                <img src="{{ profile.profile_pic.url }}" alt="{{ profile.user.username }}'s profile image"
-                    class="img-fluid rounded-circle" style="max-width: 150px;">
-                {% else %}
-                <img src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
-                    class="img-fluid rounded-circle" style="max-width: 150px;">
-                {% endif %}
-            </div>
+  <div class="profile">
+    <div class="info">
+      <div class="profile-img text-center">
+        {% if profile.profile_pic.url %}
+        <img
+          src="{{ profile.profile_pic.url }}"
+          alt="{{ profile.user.username }}'s profile image"
+          class="img-fluid rounded-circle"
+          style="max-width: 150px"
+        />
+        {% else %}
+        <img
+          src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}"
+          alt="Placeholder image"
+          class="img-fluid rounded-circle"
+          style="max-width: 150px"
+        />
+        {% endif %}
+      </div>
 
-            <h1>Account:</h1>
+      <h1>Account:</h1>
 
-            <h2><strong>{{ profile.user.username }}</strong></h2>
-            <p><strong>First Name: </strong>{{ profile.first_name }}</p>
-            <p><strong>Last Name: </strong>{{ profile.last_name }}</p>
-            <p><strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}</p>
-            <p><strong>Reviews Published: </strong>{{ profile.user.reviews.count }}</p>
-            <!-- Updated to use 'reviews' -->
+      <h2><strong>{{ profile.user.username }}</strong></h2>
+      <p><strong>First Name: </strong>{{ profile.first_name }}</p>
+      <p><strong>Last Name: </strong>{{ profile.last_name }}</p>
+      <p>
+        <strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}
+      </p>
+      <p>
+        <strong>Reviews Published: </strong>{{ profile.user.reviews.count }}
+      </p>
+      <!-- Updated to use 'reviews' -->
 
-            {% if profile.bio %}
-            <strong>About Me (Bio): </strong>
-            <p>{{ profile.bio|safe }}</p>
-            {% endif %}
+      {% if profile.bio %}
+      <strong>About Me (Bio): </strong>
+      <p>{{ profile.bio|safe }}</p>
+      {% endif %} {% if request.user == profile.user %}
+      <div>
+        <button
+          id="myBtn"
+          class="btn btn-primary w-25 mb-4"
+          data-bs-toggle="modal"
+          data-bs-target="#myModal"
+        >
+          Edit Profile
+        </button>
 
-            {% if request.user == profile.user %}
-            <div>
-                <button id="myBtn" class="btn btn-primary w-25 mb-4" data-bs-toggle="modal"
-                    data-bs-target="#myModal">Edit Profile</button>
+        <br />
 
-                <br>
-
-                <a href="{% url 'account_logout' %}">
-                    <button class="btn btn-warning w-25 mb-4">Logout</button>
-                </a>
-            </div>
-            {% endif %}
-        </div>
-
-        <div class="profile-reviews">
-            <h2 class="text-center pb-4">Personal Reviews</h2>
-            <a href="{% url 'add_review' %}">
-                <button class="btn btn-success add-review-button me-2">+ New Review</button>
-            </a>
-
-            <hr>
-
-            <!-- Personal review list -->
-
-            {% if profile.user.reviews.exists %}
-            <!-- Updated to use 'reviews' -->
-            {% for review in profile.user.reviews.all %}
-            <!-- Updated to use 'reviews' -->
-            <a href="{% url 'review_detail' review.id %}">
-                <h3>{{ review.title }}</h3>
-            </a>
-            <p>{{ review.posted_date|date:'d M Y' }}</p> <!-- Formatting the date -->
-            <hr>
-            {% endfor %}
-            {% else %}
-            <p class="text-center">No reviews posted yet.</p>
-            {% endif %}
-        </div>
+        <a href="{% url 'account_logout' %}">
+          <button class="btn btn-warning w-25 mb-4">Logout</button>
+        </a>
+      </div>
+      {% endif %}
     </div>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal fade mt-5" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content container">
-                <span class="close fs-1 pe-2" data-bs-dismiss="modal">&times;</span>
-                <form method="POST" action="{% url 'edit_profile' request.user.id %}" class="mb-2 p-2"
-                    enctype="multipart/form-data">
-                    <h2 class="text-center fs-4">Edit Profile</h2>
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary w-25">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <div class="profile-reviews">
+      <h2 class="text-center pb-4">Personal Reviews</h2>
+      <a href="{% url 'add_review' %}">
+        <button class="btn btn-success add-review-button me-2">
+          + New Review
+        </button>
+      </a>
+
+      <hr />
+
+      <!-- Personal review list -->
+
+      {% if profile.user.reviews.exists %}
+      <!-- Updated to use 'reviews' -->
+      {% for review in profile.user.reviews.all %}
+      <!-- Updated to use 'reviews' -->
+      <a href="{% url 'review_detail' review.id %}">
+        <h3>{{ review.title }}</h3>
+      </a>
+      <p>{{ review.posted_date|date:'d M Y' }}</p>
+      <!-- Formatting the date -->
+      <hr />
+      {% endfor %} {% else %}
+      <p class="text-center">No reviews posted yet.</p>
+      {% endif %}
     </div>
+  </div>
+
+  <!-- The Modal -->
+  <div
+    id="myModal"
+    class="modal fade mt-5"
+    tabindex="-1"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content container">
+        <span class="close fs-1 pe-2" data-bs-dismiss="modal">&times;</span>
+        <form
+          method="POST"
+          action="{% url 'edit_profile' request.user.id %}"
+          class="mb-2 p-2"
+          enctype="multipart/form-data"
+        >
+          <h2 class="text-center fs-4">Edit Profile</h2>
+          {% csrf_token %} {{ form|crispy }}
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary w-25">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

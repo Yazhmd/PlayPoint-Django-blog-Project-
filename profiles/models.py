@@ -30,7 +30,7 @@ class Profile(models.Model):
 
     profile_pic = CloudinaryField(
         "image",
-        default="placeholder",
+        default="blank-avatar-photo-place-holder_yvkwdr",
         transformation={
             "width": 300,
             "height": 300,
