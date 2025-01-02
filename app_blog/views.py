@@ -11,6 +11,7 @@ from django.views.generic import (
     UpdateView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.contrib import messages
 from django.db.models import Q
@@ -26,15 +27,15 @@ class HomePage(TemplateView):
     template_name = "base.html"
 
 
-class AddReview(LoginRequiredMixin, CreateView):
+class AddReview(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "app_blog/add_review.html"
     model = Review
     form_class = ReviewForm
     success_url = reverse_lazy("reviews")
+    success_message = "Review successfully created."
 
     def form_valid(self, form):
         """Automatically assign the logged-in user to the review."""
-
         form.instance.user = self.request.user
         return super().form_valid(form)
 
@@ -108,23 +109,30 @@ def review_detail(request, id):
     )
 
 
-class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model = Review
     template_name = "app_blog/review_confirm_delete.html"
     success_url = reverse_lazy("reviews")
+    success_message = "Review successfully deleted."
 
     def test_func(self):
         return self.request.user == self.get_object().user
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "Review successfully deleted.")
+        return super().delete(request, *args, **kwargs)
 
-class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+class EditReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Review
     template_name = "app_blog/edit_review.html"
     form_class = ReviewForm
     success_url = reverse_lazy("reviews")
+    success_message = "Review successfully updated."
 
     def test_func(self):
         return self.request.user == self.get_object().user
+    
 
 
 # Comment edit
@@ -171,6 +179,5 @@ def comment_delete(request, slug, comment_id):
         messages.add_message(
             request, messages.ERROR, "You can only delete your own comments!"
         )
-
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
