@@ -102,7 +102,7 @@
                 <h1>FAQs</h1>
 
 
-                <div class="accordion-item"  id="faqs-box">
+                <div class="accordion-item" id="faqs-box">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -134,20 +134,27 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <strong>1.) You are already a registered user and are logged in 
-
-
+                           
+                                <strong>
 
                                 {% if request.user.is_authenticated %}
+                               
+                                1.) You are already a registered user and are logged in.
+                                You can update your personal profile by clicking on
+                                the profile image at the top (on the navbar) where you will be greeted with your profile page.
+                                There you can click on
+                                <button id="myBtn" class="btn btn-primary w-22" data-bs-toggle="modal"
+                                    data-bs-target="#myModal">Edit Profile</button>
+                                    which will allow you to add personal details about yourself and add a personal profile
+                                    picture. You can also view all the personal reviews that you have made.
 
 
 
-                         
-                     
                                 {% else %}
 
                                 <a href="{% url 'account_signup' %}"> sign up</a> , create and set up an
-                                account/profile (Please read the terms and conditions and privacy policy).
+                                account and (optional) profile (Please read the terms and conditions and privacy
+                                policy).
                                 <br>
                                 OR
                                 <br>
@@ -178,11 +185,11 @@
                                 first)
                                 <br>
                                 If required you can also
-                                <button class="btn btn-sm btn-edit w-23"  >Edit</button>
+                                <button class="btn btn-sm btn-edit w-23">Edit</button>
 
-                                and 
+                                and
 
-                                <button class="btn btn-sm btn-delete w-23"  >Delete</button>
+                                <button class="btn btn-sm btn-delete w-23">Delete</button>
                                 any comments that you have made.
 
 
