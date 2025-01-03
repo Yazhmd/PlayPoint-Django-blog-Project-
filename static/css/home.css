@@ -11,21 +11,21 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    
+    padding: 40px 0;
 }
 
+/* Dark overlay for the background */
 .jumbotron .dark-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000;  
-    background-color: rgba(0, 0, 0, 0.7);  
+    background-color: rgba(0, 0, 0, 0.7);
 
     z-index: 1;
-}
 
+}
 
 /*   above the overlay */
 .jumbotron .content {
