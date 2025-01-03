@@ -27,6 +27,5 @@ urlpatterns = [
     # Apps urls
     path("app_blog/", include("app_blog.urls")),
     path("", include("home.urls")),
-
-    path('profiles/', include('profiles.urls')),
+    path("profiles/", include("profiles.urls")),
 ]

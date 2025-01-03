@@ -499,11 +499,11 @@ These are the finalised website features.
 
 Admin panel for reviews 
 <img src="documentation/website-features/admin-reviewpanel.png"> 
-</details>
+ 
 
 Admin panel for comments 
 <img src="documentation/website-features/admin-forcomments.png"> 
-</details>
+ 
 
 
 Admin panel for profiles 
