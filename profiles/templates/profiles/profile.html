@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block title %}Profile - {{
 profile.user.username }}{% endblock %} {% block content %}
-
 <div class="container p-4">
   <div class="profile">
     <div class="info">
@@ -31,7 +30,7 @@ profile.user.username }}{% endblock %} {% block content %}
         <strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}
       </p>
       <p>
-        <strong>Reviews Published: </strong>{{ profile.user.reviews.count }}
+        <strong>Reviews Published: </strong>{{profile.user.review_owner.count}}
       </p>
       <!-- Updated to use 'reviews' -->
 
@@ -70,9 +69,10 @@ profile.user.username }}{% endblock %} {% block content %}
 
       <!-- Personal review list -->
 
-      {% if profile.user.reviews.exists %}
+      <!-- Using related name on line 39 on models.py on app_blog -->
+      {% if profile.user.review_owner.exists %}
       <!-- Updated to use 'reviews' -->
-      {% for review in profile.user.reviews.all %}
+      {% for review in profile.user.review_owner.all %}
       <!-- Updated to use 'reviews' -->
       <a href="{% url 'review_detail' review.id %}">
         <h3>{{ review.title }}</h3>

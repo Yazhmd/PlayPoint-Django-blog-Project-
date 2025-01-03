@@ -4,114 +4,165 @@
   {% with request.resolver_match.url_name as url_name %}
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-
       <a class="navbar-brand" href="{% url 'home' %}">
         <!-- Logo image -->
-        <img src="{% static 'images/logo_white_full_playpoint-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
-          class="logo">
-
+        <img
+          src="{% static 'images/logo_white_full_playpoint-removebg-preview.webp' %}"
+          alt="Playpoint joystick Logo"
+          class="logo"
+        />
       </a>
 
       <!-- logo icon only -->
       <a href="{% url 'home' %}">
-        <img src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}" alt="Playpoint joystick Logo"
-          class="logo-alt-icon">
+        <img
+          src="{% static 'images/Playpoint_logo_icon-removebg-preview.webp' %}"
+          alt="Playpoint joystick Logo"
+          class="logo-alt-icon"
+        />
       </a>
-
 
       <!-- Logo white title -->
       <a href="{% url 'home' %}">
-        <img src="{% static 'images/White_logo_title-removebg-preview.webp' %}" alt="Playpoint Title"
-          class="logo-title">
+        <img
+          src="{% static 'images/White_logo_title-removebg-preview.webp' %}"
+          alt="Playpoint Title"
+          class="logo-title"
+        />
       </a>
 
-
       <!--checkbox Toggler  -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link   {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+            <a
+              class="nav-link {% if url_name == 'home' %}active{% endif %}"
+              href="{% url 'home' %}"
+              >Home</a
+            >
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'reviews' %}active{% endif %}" href="{% url 'reviews' %}">Reviews</a>
+            <a
+              class="nav-link {% if url_name == 'reviews' %}active{% endif %}"
+              href="{% url 'reviews' %}"
+              >Reviews</a
+            >
           </li>
 
           <li class="nav-item">
-            <a class="nav-link  " href="{% url 'home' %}#about-section">About Us</a>
+            <a class="nav-link" href="{% url 'home' %}#about-section"
+              >About Us</a
+            >
           </li>
 
           {% if request.user.is_authenticated %}
 
-          <a class=" nav-link {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">
-
-            <button class="btn btn-warning"> Logout </button>
-
+          <a
+            class="nav-link {% if url_name == 'account_logout' %}active{% endif %}"
+            href="{% url 'account_logout' %}"
+          >
+            <button class="btn btn-warning">Logout</button>
           </a>
 
-
-
           <!-- Account profile nav link -->
+          {% if profile.profile_pic.url %}
           <div class="profile-img text-center">
-            {% if profile.image.url %}
-
-            <a class=" btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
-              href="{% url 'profile' pk=request.user.id %}"> <img src="{{ profile.image.url }}"
-                alt="{{ profile.user.username }}'s profile image" class="img-fluid rounded-circle profile-link">
-              {{ profile.user.username }} </a>
+            <a
+              class="btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
+              href="{% url 'profile' pk=request.user.id %}"
+            >
+              <img
+                src="{{ profile.profile_pic.url }}"
+                alt="{{ profile.user.username }}'s profile image"
+                class="img-fluid rounded-circle"
+                style="max-width: 40px"
+              />
+              {{profile.user.username }}
+            </a>
             {% else %}
 
-            <a class="btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
-              href="{% url 'profile' pk=request.user.id %}"> <img
-                src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}" alt="Placeholder image"
-                class="img-fluid rounded-circle  profile-link"> {{ profile.user.username }} </a>
+            <a
+              class="btn btn-secondary nav-link {% if url_name == 'profile' %}active{% endif %}"
+              href="{% url 'profile' pk=request.user.id %}"
+            >
+              <img
+                src="{% static 'icons/blank-avatar-photo-place-holder.webp' %}"
+                alt="Placeholder image"
+                class="img-fluid rounded-circle profile-link"
+                style="max-width: 40px"
+              />
+              {{ profile.user.username }}
+            </a>
             {% endif %}
           </div>
-
-
-
 
           <!-- Register/Login buttons -->
 
           {% else %}
           <li class="nav-item me-3">
-            <a class="btn btn-md btn-primary rounded-pill {% if url_name == 'account_signup' %}active{% endif %}"
-              href="{% url 'account_signup' %}">Register</a>
+            <a
+              class="btn btn-md btn-primary rounded-pill {% if url_name == 'account_signup' %}active{% endif %}"
+              href="{% url 'account_signup' %}"
+              >Register</a
+            >
           </li>
 
-
           <li class="nav-item me-3">
-            <a class="btn btn-md btn-secondary rounded-pill  {% if url_name == 'login' %}active{% endif %}"
-              href=" {% url 'login' %}">Login</a>
+            <a
+              class="btn btn-md btn-secondary rounded-pill {% if url_name == 'login' %}active{% endif %}"
+              href=" {% url 'login' %}"
+              >Login</a
+            >
           </li>
           {% endif %}
         </ul>
 
         {% if request.user.is_authenticated %}
 
-
         <a href="{% url 'add_review' %}">
-          <button class="btn btn-success add-review-button me-2">+ New Review</button>
+          <button class="btn btn-success add-review-button me-2">
+            + New Review
+          </button>
         </a>
-
 
         {% else %}
         <a href=" {% url 'login' %}">
-          <button class="btn btn-success add-review-button">Write a Review</button>
+          <button class="btn btn-success add-review-button">
+            Write a Review
+          </button>
         </a>
         {% endif %}
 
-        <hr>
+        <hr />
 
         <!-- Search bar -->
         <div class="search-and-button">
-          <form class="d-flex search-form" role="search" method="GET" action="{% url 'reviews' %}">
-            <input type="search" class="form-control me-2" name="q" placeholder="Search..." aria-label="Search">
+          <form
+            class="d-flex search-form"
+            role="search"
+            method="GET"
+            action="{% url 'reviews' %}"
+          >
+            <input
+              type="search"
+              class="form-control me-2"
+              name="q"
+              placeholder="Search..."
+              aria-label="Search"
+            />
           </form>
         </div>
       </div>
