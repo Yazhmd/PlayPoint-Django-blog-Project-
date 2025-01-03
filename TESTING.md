@@ -29,7 +29,7 @@ Return back to the [README.md](README.md) file.
 
 I used [HTML W3C Validator](https://validator.w3.org) to validate all of the HTML files.
 
-Due to using Jinja syntax such as '{% extends "base.html" %} we had to use a different approach to checking the HTML as the validator would show errors if copying the HTML direct from the files in the Playpoint project. The method used to check the HTML was as follows:
+Due to using Jinja syntax such as '{% extends "base.html" %} I had to use a different approach to checking the HTML as the validator would show errors if copying the HTML direct from the files in the Playpoint project. The method used to check the HTML was as follows:
 
 - Using the deployed version from Heroku I navigated to each page.
 - Right clicking on the page brought up a options menu with the option to view the page source located at the bottom.
@@ -39,16 +39,16 @@ Due to using Jinja syntax such as '{% extends "base.html" %} we had to use a dif
 
 ![html validation](documentation/testing/validator_clear.png) 
 
-All HTML pages were validated and pages received a 'No errors or warning to show' result as shown above.
+All HTML pages were validated and pages received some errors and info prompts, unfortunatley I didn't have enough time to rectify these.
 
 | HTML source Code/Page | Errors | Warnings |
 |-----------------------|--------|----------|
-| index.html         | 0      | 0        |
-| base.html (header.html and footer.html included)            | 0      | 0        |
+| index.html         | 7      | 0        |
+| base.html (header.html and footer.html included)            | 2      | 0        |
 | Register              | 0      | 0        |
 | Log in                | 0      | 0        |
 | Log out               | 0      | 0        |
-| profiles                | 0      | 0        |
+| profiles                | 3     | 0        |
 | add review                  | 0      | 0        |
 | edit review                 | 0      | 0        |
 | review confirm delete               | 0      | 0        |
@@ -59,11 +59,11 @@ All HTML pages were validated and pages received a 'No errors or warning to show
 
 ### JavaScript Validation
 
-[JSHint](https://jshint.com/) was used to validate the small amount of JavaScript code added to the project. External JS, for Bootstrap purposes, obtained via [CDN](https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css) was not validated through JSHint.
+[JSHint](https://jshint.com/) was used to validate the JavaScript code added to the project. External JS, for Bootstrap purposes, obtained via [CDN](https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css) was not validated through JSHint.
 
 Comments.js:
-
-![Js validation](documentation/testing/validator_clear.png) 
+Unfortunately I couldn't solve these issues.
+![Js validation](documentation/testing-images/jshint.png) 
 
 
 
@@ -75,16 +75,14 @@ Comments.js:
 
 | App folders (.py files) | Errors | pep8 compliant |
 |-----------------------|--------|----------|
-| app_blog        | 0      | Yes        |
+| app_blog        | Yes     | Yes        |
 | home            | 0      | Yes     |
-| profile              | 0      | Yes        |
-| playpoint              | 0      | Yes        |
+| profile              | Yes      | Yes        |
+| playpoint              | Yes with the settings.py only   | Yes        |
 
  
 
-<details open>
-<summary>Sign out - registered users</summary>
-<img src="documentation/testing-images/">
+ 
 
 
 
@@ -92,8 +90,7 @@ Comments.js:
 
 
 
-
-</details>
+ 
 
 <hr>
 
@@ -111,22 +108,17 @@ All CSS files were tested and had no syntax errors
 
 Lighthouse testing was carried out in Incognito mode to acheive the best result. Performance was lower than preferred due to the site being image heavy. Static images used in the sites design were saved in webp. Image types added by a site admin are at there own discretion and could affect the score. The CDNs used for Bootstrap were also noted in the Lighthouse report as causing issue with performance. This report will be reviewed for future development of Playpoint to raise this score.
   
-![Lighthouse scores paginated posts](documentation/testing/lighthouse_paginated.png)
-*Desktop Paginated Blogs Page*
+![Lighthouse scores  ](documentation/testing-images/lighthouse-desktop.png)
 
-![Lighthouse scores event post](documentation/testing/lighthouse_event_post.png)
-*Desktop Blog Post Page*  
 
-![Lighthouse scores devs](documentation/testing/lighthouse_devs.png)
-*Desktop Blog Post Page*
+ 
   
 <hr>
 
 ### Wave Accessibility Evaluation 
 
-![WAVE Web Accessibility Evaluation Tools](documentation/testing/wave.png)
 
-The WAVE report tool was used to check accesability. Some contrast errors were reported in the nav and foot element but it was felt that the colour scheme should remain to match the overall aesthetic.
+The WAVE report tool was used to check accesability. Some contrast errors were reported in the nav and foot element as well as some of the images and review cards being displayed, but it I felt that the colour scheme and images should remain to match the overall aesthetic.
 
 ## Manual Testing
 
