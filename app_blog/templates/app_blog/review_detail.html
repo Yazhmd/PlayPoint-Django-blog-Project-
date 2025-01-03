@@ -90,7 +90,7 @@
                             </span> wrote:
                         </p>
                         <div id="comment{{ comment.id }}">
-                            {{ comment.body|linebreaks }}
+                           <strong> {{ comment.body|linebreaks }}</strong>
                         </div>
                         {% if not comment.approved and comment.author == user %}
                         <p class="approval">
