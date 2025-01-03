@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = "DEBUG" in os.environ
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "8000-yazhmd-playpointdjangob-pttj3uapuvm.ws.codeinstitute-ide.net",
