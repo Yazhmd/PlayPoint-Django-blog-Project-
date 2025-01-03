@@ -147,21 +147,25 @@ def comment_edit(request, slug, comment_id):
     """
     if request.method == "POST":
 
-        queryset = Post.objects.filter(status=1)
+        queryset = Review.objects.filter(status=1)
+        print('queryset', queryset)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, instance=comment)
+        comment_form = CommentForm(data=request.POST)
+        print('comment id', comment.id)
 
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.approved = False
+            print('comment id', comment.id)
             comment.save()
             messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.add_message(request, messages.ERROR, "Error updating comment!")
+            messages.add_message(request, messages.ERROR,
+                                 "Error updating comment!")
 
-    return HttpResponseRedirect(reverse("review_detail", args=[slug]))
+    return HttpResponseRedirect(reverse("review_detail", args=[post.id]))
 
 
 # Comment Delete
@@ -182,4 +186,4 @@ def comment_delete(request, slug, comment_id):
             request, messages.ERROR, "You can only delete your own comments!"
         )
 
-    return HttpResponseRedirect(reverse("review_detail", args=[slug]))
+    return HttpResponseRedirect(reverse("review_detail", args=[post.id]))

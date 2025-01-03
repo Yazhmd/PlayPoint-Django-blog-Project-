@@ -519,6 +519,8 @@ Admin panel for profiles
 
 - **Like and Dislike Button**: Allowing users to like and dislike both reviews and comments
 
+- **Editing Comments**: Allowing users to edit their existing comments
+
 - **password reset and forgot password**: Allow users to change and recover their passwords
 
 - **Other users profile view**: Being able to view other users profiles and see all the personal reviews that they havve made.

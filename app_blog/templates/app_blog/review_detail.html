@@ -103,9 +103,7 @@
                         <!-- Comment Edit and Delete buttons -->
                         {% if user.is_authenticated and comment.author == user %}
 
-                        <a href=" #comment-area">
-                            <button class="btn btn-sm btn-edit w-25" comment_id="{{ comment.id }}">Edit</button>
-                        </a>
+                     
 
 
                         <button class="btn btn-sm btn-delete w-25" data-bs-target="#deleteModal" data-bs-toggle="modal"

@@ -15,6 +15,9 @@ const cancelButton = document.getElementById("cancelButton");
  * - Updates the submit button's text to "Update".
  * - Sets the form's action attribute to the `edit_comment/{commentId}` endpoint.
  */
+
+const reviewSlug = document.querySelector("#review-slug").dataset.slug;
+
 for (let button of editButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id");
@@ -22,16 +25,17 @@ for (let button of editButtons) {
         commentText.value = commentContent;
         submitButton.innerText = "Update Comment Edit";
 
+       
 
         cancelButton.classList.remove("d-none");
-
-        commentForm.setAttribute("action", `/reviews/edit_comment/${commentId}`);
+        const url = `/app_blog/${reviewSlug}/edit_comment/${commentId}`
+        commentForm.setAttribute('action', url);
     });
 }
 
 const deleteButtons = document.getElementsByClassName("btn-delete");
 const deleteConfirm = document.getElementById("deleteConfirm");
-const reviewSlug = document.querySelector("#review-slug").dataset.slug;
+
 
 /**
  * Initializes deletion functionality for the provided delete buttons.

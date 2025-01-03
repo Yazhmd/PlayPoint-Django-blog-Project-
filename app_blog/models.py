@@ -41,7 +41,7 @@ class Review(models.Model):
         null=True,
         blank=True,
     )
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     genre = models.CharField(max_length=250)
     review = models.TextField(max_length=10000)
