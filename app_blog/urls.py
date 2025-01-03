@@ -14,7 +14,6 @@ from .views import (
 urlpatterns = [
     path("", views.HomePage.as_view(), name="home"),  # Home page view
     path("review/", AddReview.as_view(), name="add_review"),  # Add review page
-
     path("reviews/", views.Reviews.as_view(), name="reviews"),
     path(
         "review_detail/<int:id>/", views.review_detail, name="review_detail"
@@ -25,8 +24,6 @@ urlpatterns = [
     path(
         "edit/<int:pk>/", views.EditReview.as_view(), name="edit_review"
     ),  # Edit review
-
-
     path(
         "<slug:slug>/edit_comment/<int:comment_id>",
         views.comment_edit,

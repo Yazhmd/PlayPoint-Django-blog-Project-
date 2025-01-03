@@ -54,10 +54,8 @@ class Review(models.Model):
     )
     image_alt = models.CharField(max_length=100)
 
-    game_platform = models.CharField(
-        max_length=50, choices=GAME_PLATFORM, default="PC")
-    game_console = models.CharField(
-        max_length=100, null=False, blank=False, default="")
+    game_platform = models.CharField(max_length=50, choices=GAME_PLATFORM, default="PC")
+    game_console = models.CharField(max_length=100, null=False, blank=False, default="")
 
     game_score = models.IntegerField(
         choices=[(i, str(i)) for i in range(11)], default=0

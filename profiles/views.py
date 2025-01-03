@@ -10,6 +10,7 @@ from .forms import ProfileForm
 
 class Profiles(TemplateView):
     """User Profile View"""
+
     template_name = "profiles/profile.html"
 
     def get_context_data(self, **kwargs):
@@ -20,15 +21,16 @@ class Profiles(TemplateView):
 
 class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a profile"""
+
     form_class = ProfileForm
     model = Profile
-    template_name = 'profiles/edit_profile.html'  # Make sure this template exists
+    template_name = "profiles/edit_profile.html"  # Make sure this template exists
 
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs["pk"])
 
     def get_success_url(self):
-        return reverse_lazy('profile', kwargs={'pk': self.object.user.id})
+        return reverse_lazy("profile", kwargs={"pk": self.object.user.id})
 
     def form_valid(self, form):
         messages.success(self.request, "Profile has been edited successfully!")

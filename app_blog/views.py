@@ -109,7 +109,9 @@ def review_detail(request, id):
     )
 
 
-class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class DeleteReview(
+    LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView
+):
     model = Review
     template_name = "app_blog/review_confirm_delete.html"
     success_url = reverse_lazy("reviews")
@@ -123,7 +125,9 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
         return super().delete(request, *args, **kwargs)
 
 
-class EditReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class EditReview(
+    LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView
+):
     model = Review
     template_name = "app_blog/edit_review.html"
     form_class = ReviewForm
@@ -132,7 +136,6 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, U
 
     def test_func(self):
         return self.request.user == self.get_object().user
-    
 
 
 # Comment edit
@@ -156,8 +159,7 @@ def comment_edit(request, slug, comment_id):
             comment.save()
             messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.add_message(request, messages.ERROR,
-                                 "Error updating comment!")
+            messages.add_message(request, messages.ERROR, "Error updating comment!")
 
     return HttpResponseRedirect(reverse("review_detail", args=[slug]))
 
