@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = "DEBUG" in os.environ
 
 
 ALLOWED_HOSTS = [
@@ -39,8 +39,7 @@ ALLOWED_HOSTS = [
     "playpoint-blog-app-v2-e446459e072b.herokuapp.com",
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeinstitute-ide.net", "https://*.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.codeinstitute-ide.net", "https://*.herokuapp.com"]
 
 # Application definition
 
