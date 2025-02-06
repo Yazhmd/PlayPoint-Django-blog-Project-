@@ -74,9 +74,9 @@
         {% if review.comments.all %}
         {% for comment in review.comments.all %}
         <div class="col-md-8 mb-4">
-            <div class="card">
+            <div class="">
                 <div class="card-body">
-                    <div class="p-2 comments
+                    <div class="p-2 comments card
 
                     
                         {% if not comment.approved and comment.author == user %}

@@ -59,6 +59,28 @@ body {
 /* Nav Links */
 
 a.nav-link {
+    color: white;
+    text-decoration: none; 
+    box-shadow: var(--small-box-shadow);
+
+
+    transition: color 0.2s ease, text-decoration 0.2s ease;  
+}
+
+a.nav-link:hover {
+    color: #10B981;
+    text-decoration: underline;  
+    font-weight: 500;
+}
+
+a.nav-link:active, 
+a.nav-link:visited {
+    color: #ffffff; 
+}
+
+
+
+a.nav-link {
 
     color: white;
     box-shadow: var(--small-box-shadow);
@@ -150,7 +172,7 @@ main {
 footer {
     position: relative;
     z-index: 1;
-    background: #fff;
+    background: #000000;
 
     padding: 20px;
     margin-top: 30px;
@@ -189,10 +211,12 @@ footer::before {
 
     width: 3rem;
 
+    color: #ffffff;
+
 }
 
 .social-icons-container a {
-    color: #343a40;
+    color: #ffffff;
 
     font-size: 2rem;
     padding: 10px;
@@ -216,16 +240,24 @@ footer::before {
 
 .fa-github:hover {
 
-    color: #181717;
+    color: #333030;
     transform: scale(1.2);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 
+.links-container {
+
+    color: #ffffff
+
+}
 
 
 
+.copyright {
 
+    color: #ffffff;
+}
 
 
 /* Sign in/up Form */
