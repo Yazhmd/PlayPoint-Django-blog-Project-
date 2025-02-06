@@ -36,6 +36,8 @@ DEBUG = "DEBUG" in os.environ
 
 ALLOWED_HOSTS = [
     "8000-yazhmd-playpointdjangob-pttj3uapuvm.ws.codeinstitute-ide.net",
+    "localhost",
+    "127.0.0.1",
     "playpoint-blog-app-v2-e446459e072b.herokuapp.com",
 ]
 
