@@ -573,6 +573,8 @@ Further information is available in the [requirements.txt file](requirements.txt
 
 - One major bug I encountered was with my env.py as I accidently pushed it into one of my commits. However, with the help of John Rearden (coding coach) I was able to rectify this by creating a new env.py and generating both a new cludinary APi key and a Postgresql database using the CI database maker as well as creating a new secret key so that this new env.py will not get pushed and any security problems will not occur. The env.py that is shown publically on the repository is no longer active as I have removed it and is no longer in use.
 
+
+
 # Deployment
 
 ## Connecting to Github
@@ -833,6 +835,54 @@ text
 
 3. Connect to your GitHub repository from Heroku.
 4. Deploy the app from the Heroku dashboard.
+
+
+
+### IDE Workspace
+
+The IDE Workspace for this project has been created and hosted on [Gitpod](https://www.gitpod.io/) via [Code Institute](https://codeinstitute.net/) and VS code.
+
+
+
+### Via GitHub
+
+1. Navigate to your new repository.
+2. Click on the **'Open'** button also identified with the Gitpod icon.
+
+### Via Gitpod
+
+1. Navigate to [Code Institute Gitpod](https://codeinstitute-ide.net/workspaces).
+2. Click **'New Workspace'** or press **'Ctrl + O'**.
+3. Search for your project repository.
+4. Click **'Continue'** or press **'Ctrl + Enter'**.
+
+
+
+### Fork Repo
+
+To create a for of this project navigate the the top 
+1. Navigate to the **'Code*** tab.
+2. Click the drop-down menu to the right of the **'Fork'** button.
+3. Click **'+ Create a new fork'**.
+4. Using the forked repo in your GitHub account follow the deployment steps on this page.
+
+
+
+### Clone Repo
+
+To create a local clone of this project, navigate to the top 
+
+1. Navigate to the **'Code'** tab.
+2. Click the drop-down to the right of the **'Code'** button.
+3. Select you preferred cloing method **HTTPS**, **SSH** of **GitHub CLI** and copy the URL using the **'Copy'** button.
+4. Open the bash terminal in your local workspace. 
+5. Ensure your working directory is the correct location for your cloned repository.
+6. In the terminal execute command `git clone <URL>` replacing URL with the one copied in step 3.
+7. Press **'Enter'** to clone the repository. 
+8. Using the `pip3 install -r requirements.txt` command install the project dependencies.
+9. Using the deployment steps on this page setup your **env.py** file for Cloudinary and PostgreSQL.
+10. Add the **env.py** file to **.gitignore** and continue following deployment steps for Django.
+
 
 ## Git Branching
 

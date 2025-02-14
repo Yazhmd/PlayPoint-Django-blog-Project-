@@ -1,9 +1,9 @@
+
 const editButtons = document.getElementsByClassName("btn-edit");
 const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");
 const submitButton = document.getElementById("submitButton");
 const cancelButton = document.getElementById("cancelButton");
-
 
 /**
  * Initializes edit functionality for the provided edit buttons.
@@ -25,17 +25,14 @@ for (let button of editButtons) {
         commentText.value = commentContent;
         submitButton.innerText = "Update Comment Edit";
 
-       
-
         cancelButton.classList.remove("d-none");
-        const url = `/app_blog/${reviewSlug}/edit_comment/${commentId}`
+        const url = `/app_blog/${reviewSlug}/edit_comment/${commentId}`;
         commentForm.setAttribute('action', url);
     });
 }
 
 const deleteButtons = document.getElementsByClassName("btn-delete");
 const deleteConfirm = document.getElementById("deleteConfirm");
-
 
 /**
  * Initializes deletion functionality for the provided delete buttons.
@@ -48,7 +45,6 @@ const deleteConfirm = document.getElementById("deleteConfirm");
  * the user for confirmation before deletion.
  * 
  */
-
 
 for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {

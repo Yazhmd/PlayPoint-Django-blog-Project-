@@ -1,22 +1,16 @@
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import (
+    render, get_object_or_404, reverse, redirect
+)
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-
 from django.views.generic import (
-    TemplateView,
-    CreateView,
-    ListView,
-    DeleteView,
-    UpdateView,
+    TemplateView, CreateView, ListView, DeleteView, UpdateView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
 from django.contrib import messages
 from django.db.models import Q
-
-
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 
@@ -41,7 +35,8 @@ class AddReview(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def form_invalid(self, form):
         messages.error(
-            self.request, "Failed to create review. Please check the form for errors."
+            self.request,
+            "Failed to create review. Please check the form for errors."
         )
         return super().form_invalid(form)
 
@@ -67,7 +62,6 @@ class Reviews(ListView):
                 | Q(game_platform__icontains=query)
                 | Q(game_console__icontains=query)
             )
-
         else:
             review = self.model.objects.all()
         return review
@@ -76,26 +70,25 @@ class Reviews(ListView):
 def review_detail(request, id):
     review = get_object_or_404(Review, id=id)
 
-    #  comment submission
+    # Comment submission
     if request.method == "POST" and request.user.is_authenticated:
         print("Received a POST request")
         comment_form = CommentForm(request.POST)
 
         if comment_form.is_valid():
-
             # Assign the logged-in user to the comment
             comment = comment_form.save(commit=False)
             comment.author = request.user
             comment.review = review
             comment.save()
             messages.add_message(
-                request, messages.SUCCESS, "Comment submitted and awaiting approval"
+                request, messages.SUCCESS,
+                "Comment submitted and awaiting approval"
             )
             return redirect("review_detail", id=review.id)
     else:
         comment_form = CommentForm(data=request.POST)
         print("About to render template")
-
         comment_count = review.comments.filter(approved=True).count()
 
     return render(
@@ -140,36 +133,34 @@ class EditReview(
 
 # Comment edit
 
-
 def comment_edit(request, slug, comment_id):
     """
-    view to edit comments
+    View to edit comments
     """
     if request.method == "POST":
-
         queryset = Review.objects.filter(status=1)
-        print('queryset', queryset)
+        print("queryset", queryset)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
         comment_form = CommentForm(data=request.POST)
-        print('comment id', comment.id)
+        print("comment id", comment.id)
 
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.approved = False
-            print('comment id', comment.id)
+            print("comment id", comment.id)
             comment.save()
             messages.add_message(request, messages.SUCCESS, "Comment Updated!")
         else:
-            messages.add_message(request, messages.ERROR,
-                                 "Error updating comment!")
+            messages.add_message(
+                request, messages.ERROR, "Error updating comment!"
+            )
 
     return HttpResponseRedirect(reverse("review_detail", args=[post.id]))
 
 
 # Comment Delete
-
 
 def comment_delete(request, slug, comment_id):
     """

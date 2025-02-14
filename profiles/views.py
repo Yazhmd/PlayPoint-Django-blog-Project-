@@ -24,7 +24,7 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     form_class = ProfileForm
     model = Profile
-    template_name = "profiles/edit_profile.html"  # Make sure this template exists
+    template_name = "profiles/edit_profile.html"
 
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user__id=self.kwargs["pk"])

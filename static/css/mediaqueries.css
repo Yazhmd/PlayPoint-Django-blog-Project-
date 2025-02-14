@@ -154,7 +154,7 @@
 
 
 
-@media (min-width: 650px) and (max-width: 991px) {
+@media (min-width: 649px) and (max-width: 991px) {
 
     /* Alternative logo and title between 650px and 991px */
 
@@ -164,7 +164,7 @@
 
     .logo-alt-icon {
         display: block;
-        width: 10rem;
+   
     }
 
     .logo-title {

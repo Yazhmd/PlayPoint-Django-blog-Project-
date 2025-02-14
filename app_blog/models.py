@@ -1,10 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
-
 from cloudinary.models import CloudinaryField
-
-
 from django_resized import ResizedImageField
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
@@ -31,8 +28,6 @@ def get_default_user():
 
 
 # Review Model---------------------------------------------------------------->
-
-
 class Review(models.Model):
     user = models.ForeignKey(
         User,
@@ -54,11 +49,16 @@ class Review(models.Model):
     )
     image_alt = models.CharField(max_length=100)
 
-    game_platform = models.CharField(max_length=50, choices=GAME_PLATFORM, default="PC")
-    game_console = models.CharField(max_length=100, null=False, blank=False, default="")
+    game_platform = models.CharField(
+        max_length=50, choices=GAME_PLATFORM, default="PC"
+    )
+    game_console = models.CharField(
+        max_length=100, null=False, blank=False, default=""
+    )
 
     game_score = models.IntegerField(
-        choices=[(i, str(i)) for i in range(11)], default=0
+        choices=[(i, str(i)) for i in range(11)],
+        default=0,
     )
 
     posted_date = models.DateTimeField(auto_now_add=True)
@@ -87,9 +87,9 @@ class Review(models.Model):
         return self.title
 
 
-# Comment Model---------------------------------------------------------------->
-class Comment(models.Model):
+# Comment Model
 
+class Comment(models.Model):
     review = models.ForeignKey(
         Review, on_delete=models.CASCADE, related_name="comments"
     )
